@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.violin.activity">
+
+    <application>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="com.violin.action"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.violin.category"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
