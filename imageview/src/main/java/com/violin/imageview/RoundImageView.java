@@ -468,7 +468,11 @@ public class RoundImageView extends android.support.v7.widget.AppCompatImageView
         float dy = 0;
 
         mShaderMatrix.set(null);
-
+/**
+ *
+ * 缩放值按照Math.max(Vw/Bw,Vh/Bh)，即图片的宽或高比上视图的宽或高最大值来计算，较小的一边通过计算便宜量居中。
+ * 保证缩放后的图片占满视图。
+ */
         if (mBitmapWidth * mDrawableRect.height() > mDrawableRect.width() * mBitmapHeight) {
             scale = mDrawableRect.height() / (float) mBitmapHeight;
             dx = (mDrawableRect.width() - mBitmapWidth * scale) * 0.5f;
@@ -490,7 +494,11 @@ public class RoundImageView extends android.support.v7.widget.AppCompatImageView
         public void getOutline(View view, Outline outline) {
             Rect bounds = new Rect();
             mBorderRect.roundOut(bounds);
-            outline.setRoundRect(bounds, bounds.width() / 2.0f);
+            if (mIsOval) {
+                outline.setOval(bounds);
+            } else {
+                outline.setRoundRect(bounds, mRadius);
+            }
         }
 
     }
