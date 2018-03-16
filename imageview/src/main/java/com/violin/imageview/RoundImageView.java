@@ -97,7 +97,7 @@ public class RoundImageView extends android.support.v7.widget.AppCompatImageView
         mRadius = a.getDimensionPixelSize(R.styleable.RoundImageView_round_corner_radius, 0);
 
         mIsOval = a.getBoolean(R.styleable.RoundImageView_round_oval, DEFAULT_ISOVAL);
-        mCircleBackgroundColor=a.getColor(R.styleable.RoundImageView_round_background_color,DEFAULT_CIRCLE_BACKGROUND_COLOR);
+        mCircleBackgroundColor = a.getColor(R.styleable.RoundImageView_round_background_color, DEFAULT_CIRCLE_BACKGROUND_COLOR);
 
         a.recycle();
 
@@ -364,15 +364,15 @@ public class RoundImageView extends android.support.v7.widget.AppCompatImageView
         }
 
         mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-
+        //图片画笔
         mBitmapPaint.setAntiAlias(true);
         mBitmapPaint.setShader(mBitmapShader);
-
+        //边框画笔
         mBorderPaint.setStyle(Paint.Style.STROKE);
         mBorderPaint.setAntiAlias(true);
         mBorderPaint.setColor(mBorderColor);
         mBorderPaint.setStrokeWidth(mBorderWidth);
-
+        //背景画笔
         mCircleBackgroundPaint.setStyle(Paint.Style.FILL);
         mCircleBackgroundPaint.setAntiAlias(true);
         mCircleBackgroundPaint.setColor(mCircleBackgroundColor);
@@ -398,7 +398,7 @@ public class RoundImageView extends android.support.v7.widget.AppCompatImageView
 
 
     /**
-     * 就算图片的区域
+     * 计算绘制的区域
      *
      * @return
      */
@@ -429,7 +429,7 @@ public class RoundImageView extends android.support.v7.widget.AppCompatImageView
         mShaderMatrix.set(null);
 /**
  *
- * 缩放值按照Math.max(Vw/Bw,Vh/Bh)，即图片的宽或高比上视图的宽或高最大值来计算，较小的一边通过计算便宜量居中。
+ * 缩放值按照Math.max(Vw/Bw,Vh/Bh)，即图片的宽或高比上视图的宽或高最大值来计算，较小的一边通过计算偏移量居中。
  * 保证缩放后的图片占满视图。
  */
         if (mBitmapWidth * mDrawableRect.height() > mDrawableRect.width() * mBitmapHeight) {

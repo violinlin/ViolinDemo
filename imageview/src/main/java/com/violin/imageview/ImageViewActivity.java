@@ -8,9 +8,11 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class ImageViewActivity extends AppCompatActivity {
 
@@ -34,6 +36,10 @@ public class ImageViewActivity extends AppCompatActivity {
         findViewById(R.id.btn_outline).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast toast = new Toast(v.getContext());
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.setText("erewrwerewrewr");
+                toast.show();
                 if (imageView.getClipToOutline()) {
                     imageView.setClipToOutline(false);//关闭裁剪
                 } else {
@@ -47,5 +53,6 @@ public class ImageViewActivity extends AppCompatActivity {
     public static void start(Context context) {
         Intent starter = new Intent(context, ImageViewActivity.class);
         context.startActivity(starter);
+
     }
 }
