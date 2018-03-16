@@ -10,6 +10,17 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    //修改打包命名开始
+    def today = new Date().format('MMddHHmm')
+    def name = new String(defaultConfig.applicationId)
+            .substring(defaultConfig.applicationId.lastIndexOf(".") + 1)
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = name + "_" + buildType.name + "_V" + defaultConfig.versionName + "_" + today+".apk"
+        }
+    }
+    //修改打包命名结束
+
     buildTypes {
         release {
             minifyEnabled false

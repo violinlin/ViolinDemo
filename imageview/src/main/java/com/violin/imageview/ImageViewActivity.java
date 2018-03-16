@@ -36,10 +36,6 @@ public class ImageViewActivity extends AppCompatActivity {
         findViewById(R.id.btn_outline).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = new Toast(v.getContext());
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.setText("erewrwerewrewr");
-                toast.show();
                 if (imageView.getClipToOutline()) {
                     imageView.setClipToOutline(false);//关闭裁剪
                 } else {
