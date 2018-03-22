@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.violin.glsurfaceview.GLActivity;
 import com.violin.imageview.ImageViewActivity;
 import com.violin.recyclerview.ReclyclerViewActivity;
+import com.violin.viewpager.VPActivity;
 
 import java.util.List;
 
@@ -64,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 GLActivity.start(v.getContext());
+            }
+        });
+
+        findViewById(R.id.btn_vp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VPActivity.start(v.getContext());
             }
         });
     }

@@ -41,4 +41,5 @@ dependencies {
     implementation project(':recyclerview')
     implementation project(':imageview')
     implementation project(':glsurfaceview')
+    implementation project(':viewpager')
 }
