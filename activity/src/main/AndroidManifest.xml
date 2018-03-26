@@ -5,11 +5,15 @@
     <application>
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="com.violin.action"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="com.violin.category"/>
+                <action android:name="com.violin.action" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.violin.category" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DialogActivity"
+            android:theme="@style/Translucent" />
     </application>
 
 </manifest>

@@ -22,10 +22,15 @@ public class BlankFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String mParam1;
-
+    private String mTitle;
 
     public BlankFragment() {
         // Required empty public constructor
+    }
+
+    public void setTitle(String mTitle) {
+
+        this.mTitle = mTitle;
     }
 
     /**
@@ -68,6 +73,6 @@ public class BlankFragment extends Fragment {
     }
 
     public String getTitle(){
-        return  mParam1;
+        return  mTitle;
     }
 }
