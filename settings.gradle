@@ -1,1 +1,1 @@
-include ':app', ':activity', ':recyclerview', ':util', ':imageview', ':glsurfaceview', ':viewpager'
+include ':app', ':activity', ':recyclerview', ':util', ':view', ':glsurfaceview', ':viewpager'
