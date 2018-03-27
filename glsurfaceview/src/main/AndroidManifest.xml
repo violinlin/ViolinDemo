@@ -3,7 +3,9 @@
     package="com.violin.glsurfaceview">
 
     <application>
-        <activity android:name=".GLActivity"></activity>
+        <activity android:name=".GLActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            ></activity>
     </application>
 
 </manifest>
