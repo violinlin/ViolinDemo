@@ -13,16 +13,21 @@ import com.violin.glsurfaceview.GLActivity;
 import com.violin.imageview.ImageViewActivity;
 import com.violin.recyclerview.ReclyclerViewActivity;
 import com.violin.viewpager.VPActivity;
+import com.violin.violindemo.coco.CCActivity;
+import com.violin.violindemo.coco.SDKWrapper;
+
+import org.cocos2dx.lib.Cocos2dxActivity;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Cocos2dxActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+
     }
 
     private void initView() {
@@ -72,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 VPActivity.start(v.getContext());
+            }
+        });
+        findViewById(R.id.btn_coco).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CCActivity.start(v.getContext());
+//                MainActivity.this.finish();
             }
         });
     }

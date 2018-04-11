@@ -8,7 +8,15 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DialogActivity extends AppCompatActivity {
+
+    private String mName;
+    private List<String> mList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +25,7 @@ public class DialogActivity extends AppCompatActivity {
 
         Window window = getWindow();
         WindowManager.LayoutParams attributes = window.getAttributes();
-        attributes.width= (int) (getResources().getDisplayMetrics().widthPixels*0.8);
+        attributes.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.8);
 
         window.setAttributes(attributes);
 

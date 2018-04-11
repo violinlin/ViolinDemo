@@ -44,4 +44,11 @@
         android:textAllCaps="false"
         android:id="@+id/btn_vp"
         />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Coco2d"
+        android:textAllCaps="false"
+        android:id="@+id/btn_coco"
+        />
 </LinearLayout>
