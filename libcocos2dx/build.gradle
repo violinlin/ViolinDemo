@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 9
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile files('libs/EngineDataManager.jar')
+    compile files('libs/android-async-http-1.4.9.jar')
+    compile files('libs/com.android.vending.expansion.zipfile.jar')
+    compile files('libs/httpclient-4.4.1.1.jar')
+}
