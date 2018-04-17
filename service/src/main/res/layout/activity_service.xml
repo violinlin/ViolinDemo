@@ -5,54 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.violin.violindemo.MainActivity">
+    tools:context="com.violin.service.ServiceActivity">
 
     <Button
-        android:id="@+id/btn_activity"
+        android:id="@+id/btn_start_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="activity"
-        android:textAllCaps="false" />
+        android:text="启动服务" />
 
     <Button
-        android:id="@+id/btn_recyclerview"
+        android:id="@+id/btn_stop_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RecyclerView"
-        android:textAllCaps="false" />
+        android:text="结束服务" />
 
     <Button
-        android:id="@+id/btn_imageview"
+        android:id="@+id/btn_bind_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ImageView"
-        android:textAllCaps="false" />
+        android:text="绑定服务"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_editor_absoluteY="100dp" />
 
     <Button
-        android:id="@+id/btn_glsurfaceview"
+        android:id="@+id/btn_unbind_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="GlsurfaceView"
-        android:textAllCaps="false" />
+        android:text="解绑服务" />
 
     <Button
-        android:id="@+id/btn_vp"
+        android:id="@+id/btn_bind_AIDL_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ViewPager"
-        android:textAllCaps="false" />
+        android:text="绑定AIDL服务" />
 
     <Button
-        android:id="@+id/btn_coco"
+        android:id="@+id/btn_unbind_AIDL_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Coco2d"
-        android:textAllCaps="false" />
+        android:text="解绑AIDL服务" />
 
     <Button
-        android:id="@+id/btn_service"
+        android:id="@+id/btn_getAIDL_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Service"
-        android:textAllCaps="false" />
+        android:text="获取AIDL进程ID" />
+
 </LinearLayout>

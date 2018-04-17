@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.violin.glsurfaceview.GLActivity;
 import com.violin.imageview.ImageViewActivity;
 import com.violin.recyclerview.ReclyclerViewActivity;
+import com.violin.service.ServiceActivity;
 import com.violin.viewpager.VPActivity;
 import com.violin.violindemo.coco.CCActivity;
 import com.violin.violindemo.coco.SDKWrapper;
@@ -84,6 +85,13 @@ public class MainActivity extends Cocos2dxActivity {
             public void onClick(View v) {
                 CCActivity.start(v.getContext());
 //                MainActivity.this.finish();
+            }
+        });
+
+        findViewById(R.id.btn_service).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ServiceActivity.start(v.getContext());
             }
         });
     }
