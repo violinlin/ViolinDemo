@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.webkit.DownloadListener;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -79,6 +81,11 @@ public class ExtendWebView extends FrameLayout {
             }
 
             @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed(); // 加载https的不安全网站处理 例如https://www.12306.cn/mormhweb/
+            }
+
+            @Override
             public void onPageFinished(WebView view, String url) {
 
                 super.onPageFinished(view, url);
@@ -97,7 +104,7 @@ public class ExtendWebView extends FrameLayout {
 
 //                boolean isOverRide = super.shouldOverrideUrlLoading(webView, s);
                 Log.d("whl", "url " + s);
-//                Log.d("whl","isoverride  "+isOverRide);
+                Log.d("whl", "isoverride  " + URLDecoder.decode(s));
 //                return super.shouldOverrideUrlLoading(webView, s);
                 if (s.startsWith("http://") || s.startsWith("https://")) {
                     webView.loadUrl(s);
@@ -119,11 +126,7 @@ public class ExtendWebView extends FrameLayout {
         webView.setWebViewClient(client);
         webView.setWebChromeClient(chromeClient);
         WebSettings webSettings = webView.getSettings();
-//
-//        webSettings.setSupportMultipleWindows(false);
-//        webSettings.setSupportZoom(false);
-//        webSettings.setBuiltInZoomControls(false);
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//缓存模式，不加载缓存
 
 
         webSettings.setJavaScriptEnabled(true);
@@ -157,19 +160,18 @@ public class ExtendWebView extends FrameLayout {
 
             }
         });
-//        webSettings.setJavaScriptEnabled(true);//设置webview支持js脚本
-//        webSettings.setLoadsImagesAutomatically(true);//支持自动加载图片
+//        webSettings.setLoadsImagesAutomatically(true);//支持自动加载图片,默认为true
 ////        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 ////            webView.setWebContentsDebuggingEnabled(true);
 ////        }
         //设置自适应屏幕，两者合用
-//        webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
-//        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+        webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
+        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
 //
 //        //缩放操作
-//        webSettings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。
-//        webSettings.setBuiltInZoomControls(true); //设置内置的缩放控件。若为false，则该WebView不可缩放
-//        webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
+        webSettings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。
+        webSettings.setBuiltInZoomControls(true); //设置内置的缩放控件。若为false，则该WebView不可缩放
+        webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
 
     }
 
