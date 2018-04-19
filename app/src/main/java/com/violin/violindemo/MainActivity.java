@@ -16,6 +16,7 @@ import com.violin.service.ServiceActivity;
 import com.violin.viewpager.VPActivity;
 import com.violin.violindemo.coco.CCActivity;
 import com.violin.violindemo.coco.SDKWrapper;
+import com.violin.webview.WebViewActivity;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
@@ -92,6 +93,14 @@ public class MainActivity extends Cocos2dxActivity {
             @Override
             public void onClick(View v) {
                 ServiceActivity.start(v.getContext());
+            }
+        });
+
+        findViewById(R.id.btn_webview).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebViewActivity.start(v.getContext());
+
             }
         });
     }
