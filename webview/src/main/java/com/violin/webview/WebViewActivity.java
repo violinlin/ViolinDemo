@@ -2,8 +2,15 @@ package com.violin.webview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.http.SslError;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.violin.webview.webview.ExtendWebView;
 
@@ -21,12 +28,31 @@ public class WebViewActivity extends AppCompatActivity {
 
     private void initView() {
         mExtendWebView = findViewById(R.id.ex_webview);
+
+        mExtendWebView.setListener(new ExtendWebView.Listener() {
+            @Override
+            public void onPageStart(String url) {
+
+            }
+
+            @Override
+            public void onPageFinish(String url) {
+
+            }
+
+            @Override
+            public void onPageError() {
+
+            }
+        });
+//
 //        mExtendWebView.getWebView().loadUrl("https://www.baidu.com/");
 //        mExtendWebView.getWebView().loadUrl("https://www.jd.com/");
-        mExtendWebView.getWebView().loadUrl("https://www.12306.cn/mormhweb/");
+//        mExtendWebView.getWebView().loadUrl("https://www.12306.cn/mormhweb/");
 //        extendWebView.getWebView().loadUrl("https://www.jianshu.com/");
 //        extendWebView.getWebView().loadUrl("https://blog.androidhuilin.wang/");
 //        mExtendWebView.getWebView().loadUrl("http://192.168.4.36:8080/cspShare/html/share.html");
+        mExtendWebView.getWebView().loadUrl("http://192.168.4.22:3001/dist/html/share.html");
     }
 
     public static void start(Context context) {

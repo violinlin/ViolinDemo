@@ -14,6 +14,8 @@ import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -37,6 +39,7 @@ public class ExtendWebView extends FrameLayout {
 
     private ProgressBar progressBar;
 
+    private Listener mListener;
 
     public ProgressBar getProgressBar() {
         return progressBar;
@@ -69,6 +72,7 @@ public class ExtendWebView extends FrameLayout {
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 progressBar.setProgress(newProgress);
+
             }
         };
 
@@ -77,7 +81,9 @@ public class ExtendWebView extends FrameLayout {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 progressBar.setVisibility(View.VISIBLE);
-
+                if (mListener != null) {
+                    mListener.onPageStart(url);
+                }
             }
 
             @Override
@@ -90,7 +96,18 @@ public class ExtendWebView extends FrameLayout {
 
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
+                if (mListener != null) {
+                    mListener.onPageFinish(url);
+                }
 
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                if (mListener != null) {
+                    mListener.onPageError();
+                }
             }
 
             @Override
@@ -195,5 +212,17 @@ public class ExtendWebView extends FrameLayout {
             webView.removeAllViews();
             webView.destroy();
         }
+    }
+
+    public void setListener(Listener listener) {
+        mListener = listener;
+    }
+
+    public interface Listener {
+        void onPageStart(String url);
+
+        void onPageFinish(String url);
+
+        void onPageError();
     }
 }
