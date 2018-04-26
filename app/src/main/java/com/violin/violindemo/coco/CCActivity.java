@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
-import org.cocos2dx.lib.Cocos2dxActivity;
-import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 /**
  * Created by wanghuilin on 2018/3/30.
@@ -15,7 +13,7 @@ import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
  * email:violinlin@yeah.net
  */
 
-public class CCActivity  extends Cocos2dxActivity {
+public class CCActivity  extends Activity {
 
     public static void start(Context context) {
         Intent starter = new Intent(context, CCActivity.class);

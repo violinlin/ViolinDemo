@@ -1,2 +1,1 @@
-include ':app', ':activity', ':recyclerview', ':util', ':view', ':glsurfaceview', ':viewpager', ':libcocos2dx', ':service', ':webview'
-include ':libcocos2dx'
+include ':app', ':activity', ':recyclerview', ':util', ':view', ':glsurfaceview', ':viewpager',  ':service', ':webview', ':yjsdk'

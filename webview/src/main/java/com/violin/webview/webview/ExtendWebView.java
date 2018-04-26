@@ -93,7 +93,7 @@ public class ExtendWebView extends FrameLayout {
 
             @Override
             public void onPageFinished(WebView view, String url) {
-
+                Log.d("whl", "finish" + url);
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
                 if (mListener != null) {

@@ -1,14 +1,19 @@
 package com.violin.violindemo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.snowfish.ganga.helper.YJSDKHelper;
+import com.snowfish.ganga.usercenter.YJLoginListener;
+import com.snowfish.ganga.usercenter.YJUserInfo;
 import com.violin.glsurfaceview.GLActivity;
 import com.violin.imageview.ImageViewActivity;
 import com.violin.recyclerview.ReclyclerViewActivity;
@@ -18,17 +23,35 @@ import com.violin.violindemo.coco.CCActivity;
 import com.violin.violindemo.coco.SDKWrapper;
 import com.violin.webview.WebViewActivity;
 
-import org.cocos2dx.lib.Cocos2dxActivity;
 
 import java.util.List;
 
-public class MainActivity extends Cocos2dxActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        YJSDKHelper.init(this);
+
+        YJLoginListener listener=new YJLoginListener() {
+            @Override
+            public void loginSuccess(YJUserInfo yjUserInfo) {
+                Log.d("whl",yjUserInfo.session_id);
+            }
+
+            @Override
+            public void loginFail(String s) {
+
+            }
+
+            @Override
+            public void logoutSuccess() {
+
+            }
+        };
+        YJSDKHelper.login(this,listener);
 
     }
 

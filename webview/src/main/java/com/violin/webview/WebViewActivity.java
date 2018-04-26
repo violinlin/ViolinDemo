@@ -46,13 +46,13 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
 //
-//        mExtendWebView.getWebView().loadUrl("https://www.baidu.com/");
+        mExtendWebView.getWebView().loadUrl("https://www.baidu.com/");
 //        mExtendWebView.getWebView().loadUrl("https://www.jd.com/");
 //        mExtendWebView.getWebView().loadUrl("https://www.12306.cn/mormhweb/");
 //        extendWebView.getWebView().loadUrl("https://www.jianshu.com/");
 //        extendWebView.getWebView().loadUrl("https://blog.androidhuilin.wang/");
 //        mExtendWebView.getWebView().loadUrl("http://192.168.4.36:8080/cspShare/html/share.html");
-        mExtendWebView.getWebView().loadUrl("http://192.168.4.22:3001/dist/html/share.html");
+//        mExtendWebView.getWebView().loadUrl("http://192.168.4.22:3001/dist/html/share.html");
     }
 
     public static void start(Context context) {

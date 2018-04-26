@@ -22,6 +22,10 @@ android {
     //修改打包命名结束
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -44,4 +48,5 @@ dependencies {
     implementation project(':viewpager')
     implementation project(':service')
     implementation project(':webview')
+    implementation project(':yjsdk')
 }
