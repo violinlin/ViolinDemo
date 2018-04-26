@@ -19,3 +19,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+#-keep class org.apache.** {*;}
+-keep class com.alipay.android.phone.mrpc.core.** { *; }
+#-keep class android.net.**{*;}
