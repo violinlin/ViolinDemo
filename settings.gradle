@@ -1,1 +1,1 @@
-include ':app', ':activity', ':recyclerview', ':util', ':view', ':glsurfaceview', ':viewpager',  ':service', ':webview', ':yjsdk'
+include ':app', ':activity', ':recyclerview', ':util', ':view', ':glsurfaceview', ':viewpager',  ':service', ':webview'
