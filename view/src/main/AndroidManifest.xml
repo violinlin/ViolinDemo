@@ -3,7 +3,9 @@
     package="com.violin.imageview">
 
     <application>
-        <activity android:name=".ImageViewActivity"></activity>
+        <activity android:name=".ImageViewActivity" />
+        <activity android:name=".ConstraintActivity"></activity>
+        <activity android:name=".ViewActivity" />
     </application>
 
 </manifest>

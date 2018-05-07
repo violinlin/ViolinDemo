@@ -11,11 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.snowfish.ganga.helper.YJSDKHelper;
-import com.snowfish.ganga.usercenter.YJLoginListener;
-import com.snowfish.ganga.usercenter.YJUserInfo;
 import com.violin.glsurfaceview.GLActivity;
 import com.violin.imageview.ImageViewActivity;
+import com.violin.imageview.ViewActivity;
 import com.violin.recyclerview.ReclyclerViewActivity;
 import com.violin.service.ServiceActivity;
 import com.violin.viewpager.VPActivity;
@@ -33,25 +31,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        YJSDKHelper.init(this);
-
-        YJLoginListener listener=new YJLoginListener() {
-            @Override
-            public void loginSuccess(YJUserInfo yjUserInfo) {
-                Log.d("whl",yjUserInfo.session_id);
-            }
-
-            @Override
-            public void loginFail(String s) {
-
-            }
-
-            @Override
-            public void logoutSuccess() {
-
-            }
-        };
-        YJSDKHelper.login(this,listener);
 
     }
 
@@ -87,7 +66,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.btn_imageview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageViewActivity.start(v.getContext());
+                ViewActivity.start(v.getContext());
             }
         });
 
