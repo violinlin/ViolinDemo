@@ -33,6 +33,7 @@ public class LinearFragment extends BaseFragment {
     public static final String TAG = LinearFragment.class.getName();
     private NextPageControl nextPageControl;
     private HFRecyclerControl hfRecyclerControl;
+    private RecyclerAdapter mAdapter;
 
     public LinearFragment() {
         // Required empty public constructor
@@ -90,21 +91,24 @@ public class LinearFragment extends BaseFragment {
         RecyclerView recyclerView = getView().findViewById(R.id.recyclerview);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
-        RecyclerAdapter adapter = new RecyclerAdapter();
+        mAdapter = new RecyclerAdapter();
 
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mAdapter);
         hfRecyclerControl = new HFRecyclerControl();
-        hfRecyclerControl.setAdapter(recyclerView,adapter);
+        hfRecyclerControl.setAdapter(recyclerView, mAdapter);
+
 
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                int space= Util.dp2px(view.getContext(),5);
-                outRect.left=outRect.right=outRect.top=outRect.bottom=space;
+                int space = Util.dp2px(view.getContext(), 5);
+                outRect.left = outRect.right = outRect.top = outRect.bottom = space;
             }
         });
+
         nextPageControl = new NextPageControl();
         nextPageControl.setUpWithRecyclerView(recyclerView);
+        nextPageControl.linkHFRecycler(hfRecyclerControl);
         nextPageControl.setListener(new NextPageControl.Listener() {
             @Override
             public void requestNextPageData() {
@@ -114,13 +118,13 @@ public class LinearFragment extends BaseFragment {
             }
         });
         List<String> dataList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
 
             dataList.add("Item" + i);
 
         }
 
-        adapter.setDatas(dataList);
+        mAdapter.setDatas(dataList);
 
 
     }
@@ -132,13 +136,20 @@ public class LinearFragment extends BaseFragment {
             @Override
             public void run() {
                 nextPageControl.setRequestNext(false);
-                if (mPageNO > 3) {
+                if (mPageNO > 2) {
                     nextPageControl.setHasMore(false);
                     Log.d(TAG, "加载完毕");
                 }
+                List<String> dataList = new ArrayList<>();
+                for (int i = 0; i < 10; i++) {
+
+                    dataList.add("Item" + i);
+                    mAdapter.addDatas(dataList);
+
+                }
 
             }
-        }, 5000);
+        }, 3000);
     }
 
     @Override

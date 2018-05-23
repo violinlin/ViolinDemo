@@ -1,11 +1,13 @@
 package com.violin.recyclerview.kit.nextpage;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -18,7 +20,7 @@ import com.violin.util.Util;
  * email:violinlin@yeah.net
  */
 
-public class NextPageView extends FrameLayout {
+public class NextPageView extends LinearLayout {
 
     private TextView promptTV;
     private ProgressBar progressBar;
@@ -29,7 +31,11 @@ public class NextPageView extends FrameLayout {
 
     public NextPageView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, Util.dp2px(getContext(), 50)));
+        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, Util.dp2px(getContext(), 50));
+        setGravity(Gravity.CENTER);
+        setOrientation(LinearLayout.HORIZONTAL);
+        setLayoutParams(params);
+        View.inflate(context, R.layout.kit_nextpage_view, this);
         initView();
     }
 
@@ -39,25 +45,26 @@ public class NextPageView extends FrameLayout {
         progressBar = findViewById(R.id.pb_progress);
     }
 
-    public void loading() {
+
+    public void loading(String prompt) {
         setVisibility(VISIBLE);
-        promptTV.setVisibility(GONE);
+        promptTV.setText(prompt);
         progressBar.setVisibility(VISIBLE);
     }
 
-    public void lastPage() {
+    public void lastPage(String prompt) {
         setVisibility(VISIBLE);
         promptTV.setVisibility(VISIBLE);
-        promptTV.setText("已显示全部内容");
+        promptTV.setText(prompt);
         progressBar.setVisibility(GONE);
 
     }
 
-    public void error(final Listener listener) {
+    public void error(String prompt, final Listener listener) {
         setVisibility(VISIBLE);
         promptTV.setVisibility(VISIBLE);
         progressBar.setVisibility(GONE);
-        promptTV.setText("加载错误，请点击重试");
+        promptTV.setText(prompt);
         if (listener != null) {
             setOnClickListener(new OnClickListener() {
                 @Override

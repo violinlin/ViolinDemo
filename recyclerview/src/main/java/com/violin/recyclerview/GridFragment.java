@@ -33,6 +33,7 @@ public class GridFragment extends BaseFragment {
     public static final String TAG = GridFragment.class.getName();
     private NextPageControl nextPageControl;
     private HFRecyclerControl hfRecyclerControl;
+    private RecyclerAdapter mAdapter;
 
     public GridFragment() {
         // Required empty public constructor
@@ -87,7 +88,7 @@ public class GridFragment extends BaseFragment {
         RecyclerView recyclerView = getView().findViewById(R.id.recyclerview);
         GridLayoutManager manager = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(manager);
-        RecyclerAdapter adapter = new RecyclerAdapter();
+        mAdapter = new RecyclerAdapter();
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
@@ -95,13 +96,14 @@ public class GridFragment extends BaseFragment {
                 outRect.left=outRect.right=outRect.top=outRect.bottom=space;
             }
         });
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mAdapter);
 
         hfRecyclerControl = new HFRecyclerControl();
-        hfRecyclerControl.setAdapter(recyclerView,adapter);
+        hfRecyclerControl.setAdapter(recyclerView, mAdapter);
 
         nextPageControl = new NextPageControl();
         nextPageControl.setUpWithRecyclerView(recyclerView);
+        nextPageControl.linkHFRecycler(hfRecyclerControl);
         nextPageControl.setListener(new NextPageControl.Listener() {
             @Override
             public void requestNextPageData() {
@@ -117,7 +119,7 @@ public class GridFragment extends BaseFragment {
 
         }
 
-        adapter.setDatas(dataList);
+        mAdapter.setDatas(dataList);
 
 
     }
@@ -129,13 +131,21 @@ public class GridFragment extends BaseFragment {
             @Override
             public void run() {
                 nextPageControl.setRequestNext(false);
-                if (mPageNO > 3) {
+                if (mPageNO > 2) {
                     nextPageControl.setHasMore(false);
                     Log.d(TAG, "加载完毕");
                 }
+                List<String> dataList = new ArrayList<>();
+                for (int i = 0; i < 40; i++) {
+
+                    dataList.add("Item" + i);
+
+                }
+
+                mAdapter.addDatas(dataList);
 
             }
-        }, 5000);
+        }, 3000);
     }
 
     @Override

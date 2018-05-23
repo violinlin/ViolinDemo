@@ -4,7 +4,8 @@
 
     <application>
         <activity android:name=".ImageViewActivity" />
-        <activity android:name=".ConstraintActivity"></activity>
+        <activity android:name=".ConstraintActivity"
+           android:theme="@android:style/Theme.Translucent.NoTitleBar" ></activity>
         <activity android:name=".ViewActivity" />
     </application>
 

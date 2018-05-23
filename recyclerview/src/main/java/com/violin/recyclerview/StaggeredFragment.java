@@ -36,6 +36,7 @@ public class StaggeredFragment extends BaseFragment {
     private NextPageControl nextPageControl;
     private long mPageNO;
     private HFRecyclerControl hfRecyclerControl;
+    private RecyclerAdapter mAdapter;
 
     public StaggeredFragment() {
         // Required empty public constructor
@@ -93,11 +94,11 @@ public class StaggeredFragment extends BaseFragment {
         StaggeredGridLayoutManager manager =
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
-        RecyclerAdapter adapter = new RecyclerAdapter();
+        mAdapter = new RecyclerAdapter();
 
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mAdapter);
         hfRecyclerControl = new HFRecyclerControl();
-        hfRecyclerControl.setAdapter(recyclerView,adapter);
+        hfRecyclerControl.setAdapter(recyclerView, mAdapter);
 
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -109,6 +110,7 @@ public class StaggeredFragment extends BaseFragment {
 
         nextPageControl = new NextPageControl();
         nextPageControl.setUpWithRecyclerView(recyclerView);
+        nextPageControl.linkHFRecycler(hfRecyclerControl);
         nextPageControl.setListener(new NextPageControl.Listener() {
             @Override
             public void requestNextPageData() {
@@ -128,7 +130,7 @@ public class StaggeredFragment extends BaseFragment {
 
         }
 
-        adapter.setDatas(dataList);
+        mAdapter.setDatas(dataList);
 
 
     }
@@ -140,10 +142,23 @@ public class StaggeredFragment extends BaseFragment {
             @Override
             public void run() {
                 nextPageControl.setRequestNext(false);
-                if (mPageNO > 3) {
+                if (mPageNO > 2) {
                     nextPageControl.setHasMore(false);
                     Log.d(TAG, "加载完毕");
                 }
+
+                List<String> dataList = new ArrayList<>();
+                for (int i = 0; i < 40; i++) {
+                    StringBuilder sb = new StringBuilder();
+                    int r = new Random().nextInt(10);
+                    for (int j = 0; j < r; j++) {
+                        sb.append("\n");
+                    }
+                    dataList.add("Item" + i + sb);
+
+                }
+
+                mAdapter.addDatas(dataList);
 
             }
         }, 5000);

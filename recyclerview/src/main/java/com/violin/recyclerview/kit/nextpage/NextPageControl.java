@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 
+import com.violin.recyclerview.kit.rvextension.HFRecyclerControl;
+
 /**
  * Created by wanghuilin on 2018/3/6.
  * <p>
@@ -19,6 +21,8 @@ public class NextPageControl {
     private boolean isRequestNext;//是否正在加载下一页
 
     RecyclerView mRecyclerView;
+    private HFRecyclerControl mHfRecyclerControl;
+    private NextPageView mNextPageView;
 
     public void setUpWithRecyclerView(RecyclerView recyclerView) {
         mRecyclerView = recyclerView;
@@ -61,6 +65,12 @@ public class NextPageControl {
 
             }
         });
+    }
+
+    public void linkHFRecycler(HFRecyclerControl hfRecyclerControl){
+        mHfRecyclerControl=hfRecyclerControl;
+        mNextPageView = new NextPageView(hfRecyclerControl.getRecyclerView().getContext());
+        hfRecyclerControl.addFooterView(mNextPageView);
     }
 
     private void parseNextPage(boolean isSlidingToLast) {
@@ -106,10 +116,20 @@ public class NextPageControl {
 
     public void setHasMore(boolean hasMore) {
         this.hasMore = hasMore;
+        if (!hasMore){
+            if (mNextPageView!=null){
+                mNextPageView.lastPage("数据加载完毕！");
+            }
+        }
     }
 
     public void setRequestNext(boolean requestNext) {
         isRequestNext = requestNext;
+        if (requestNext){
+            if (mNextPageView!=null){
+                mNextPageView.loading("加载数据中...");
+            }
+        }
     }
 
     public interface Listener {

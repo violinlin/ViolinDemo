@@ -20,32 +20,46 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RViewH
     private List<String> datas;
 
     public RecyclerAdapter() {
-        datas = new ArrayList<>();
+
     }
 
     public void setDatas(List<String> list) {
-        datas.clear();
-        datas.addAll(list);
+        if (list == null || list.isEmpty()) {
+            if (datas != null && !datas.isEmpty()) {
+                datas.clear();
+                notifyDataSetChanged();
+            }
+            return;
+        }
+        datas = list;
         notifyDataSetChanged();
     }
 
     public void addDatas(List<String> list) {
+        if (list == null || list.isEmpty()) {
+            return;
+        }
+        if (datas == null) {
+            setDatas(list);
+            return;
+        }
+
         datas.addAll(list);
         notifyDataSetChanged();
     }
 
     public void removeItem(int position) {
-        position=datas.size()>position?position:datas.size()-1;
+        position = datas.size() > position ? position : datas.size() - 1;
         datas.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, datas.size()-position);
+        notifyItemRangeChanged(position, datas.size() - position);
     }
 
     public void insertItem(int position, String data) {
-        position=datas.size()>position?position:datas.size()-1;
+        position = datas.size() > position ? position : datas.size() - 1;
         datas.add(position, data);
         notifyItemInserted(position);
-        notifyItemRangeChanged(position, datas.size()-position);
+        notifyItemRangeChanged(position, datas.size() - position);
 
     }
 
@@ -69,7 +83,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RViewH
 
     @Override
     public int getItemCount() {
-        return datas.size();
+         return datas == null ? 0 : datas.size();
     }
 
     public class RViewHolder extends RecyclerView.ViewHolder {

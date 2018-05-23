@@ -1,11 +1,12 @@
 package com.violin.imageview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ConstraintActivity extends AppCompatActivity {
+public class ConstraintActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
