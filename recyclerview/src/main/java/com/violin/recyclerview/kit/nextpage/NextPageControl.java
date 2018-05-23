@@ -107,6 +107,7 @@ public class NextPageControl {
         // 判断是否滚动到底部，并且是向下滚动
         if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
             if (listener != null) {
+                setRequestNext(true);
                 listener.requestNextPageData();
             }
         }

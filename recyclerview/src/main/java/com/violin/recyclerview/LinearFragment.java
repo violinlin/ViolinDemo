@@ -112,7 +112,6 @@ public class LinearFragment extends BaseFragment {
         nextPageControl.setListener(new NextPageControl.Listener() {
             @Override
             public void requestNextPageData() {
-                nextPageControl.setRequestNext(true);
                 Log.d(TAG, "requestNext");
                 loadNextData();
             }
