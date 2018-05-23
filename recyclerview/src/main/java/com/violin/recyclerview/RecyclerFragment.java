@@ -1,33 +1,47 @@
 package com.violin.recyclerview;
 
-import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReclyclerViewActivity extends AppCompatActivity {
+/**
+ * Created by wanghuilin on 2018/5/23.
+ * <p>
+ * email:wanghuilin@zshiliu.com
+ */
+
+public class RecyclerFragment extends Fragment {
+
+    public RecyclerFragment() {
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_reclycler_view, container, false);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reclycler_view);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         initView();
     }
 
     private void initView() {
-        TabLayout tabLayout = findViewById(R.id.tablayout);
-        ViewPager viewPager = findViewById(R.id.viewpager);
-        VPAdapter vpAdapter = new VPAdapter(getSupportFragmentManager());
+        TabLayout tabLayout = getView().findViewById(R.id.tablayout);
+        ViewPager viewPager = getView().findViewById(R.id.viewpager);
+        VPAdapter vpAdapter = new VPAdapter(getChildFragmentManager());
         viewPager.setAdapter(vpAdapter);
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(LinearFragment.newInstance());
@@ -46,7 +60,6 @@ public class ReclyclerViewActivity extends AppCompatActivity {
             super(fm);
             fragments = new ArrayList<>();
         }
-
 
         public void setData(List<BaseFragment> fragments) {
             this.fragments = fragments;
@@ -67,11 +80,5 @@ public class ReclyclerViewActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return fragments.get(position).getTitle();
         }
-    }
-
-
-    public static void start(Context context) {
-        Intent starter = new Intent(context, ReclyclerViewActivity.class);
-        context.startActivity(starter);
     }
 }

@@ -61,7 +61,8 @@ public class MainActivity extends Activity {
         recyclerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ReclyclerViewActivity.start(v.getContext());
+//                ReclyclerViewActivity.start(v.getContext());
+                JumpUtils.recyclerView(v.getContext());
             }
         });
 
