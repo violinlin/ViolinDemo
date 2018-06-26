@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.violin.glsurfaceview.GLActivity;
+import com.violin.firstkt.FirstKT;
 import com.violin.imageview.ImageViewActivity;
 import com.violin.imageview.ViewActivity;
 import com.violin.recyclerview.ReclyclerViewActivity;
@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.btn_glsurfaceview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GLActivity.start(v.getContext());
+//                GLActivity.start(v.getContext());
             }
         });
 
@@ -117,6 +117,15 @@ public class MainActivity extends Activity {
                 Uri uri = Uri.fromParts("package", MainActivity.this.getPackageName(), null);
                 intent.setData(uri);
                 startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn_kotlin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirstKT firstKT = new FirstKT();
+                firstKT.start(v.getContext());
+
             }
         });
     }

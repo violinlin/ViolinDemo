@@ -1,1 +1,1 @@
-include ':app', ':activity', ':recyclerview', ':base', ':view', ':glsurfaceview', ':viewpager',  ':service', ':webview'
+include ':app', ':activity', ':recyclerview', ':base', ':view', ':viewpager',  ':service', ':webview', ':firstkt'
