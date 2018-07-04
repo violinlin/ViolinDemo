@@ -25,6 +25,7 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue("string", "build_time", "key")
         }
         release {
             minifyEnabled false

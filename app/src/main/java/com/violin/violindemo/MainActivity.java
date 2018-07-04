@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 FirstKT firstKT = new FirstKT();
                 firstKT.start(v.getContext());
-
+                getResources().getString(R.string.build_time);
             }
         });
     }
