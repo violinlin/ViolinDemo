@@ -102,6 +102,7 @@ public class MainActivity extends Activity {
         });
 
         findViewById(R.id.btn_webview).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 WebViewActivity.start(v.getContext());
