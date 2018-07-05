@@ -98,6 +98,7 @@ public class MainActivity extends Activity {
         });
 
         findViewById(R.id.btn_service).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 ServiceActivity.start(v.getContext());
