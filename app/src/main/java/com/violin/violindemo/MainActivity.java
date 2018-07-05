@@ -90,6 +90,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 CCActivity.start(v.getContext());
+
 //                MainActivity.this.finish();
             }
         });
