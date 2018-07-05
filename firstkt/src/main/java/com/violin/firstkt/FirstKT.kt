@@ -12,7 +12,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.violin.firstkt.adapter.BaseUtil
 import com.violin.firstkt.adapter.RVAdapter
 import com.violin.firstkt.bean.Book
 
@@ -27,8 +26,6 @@ class FirstKT : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kt)
-        val base = BaseUtil("hello");
-        base.name
         initView()
     }
 

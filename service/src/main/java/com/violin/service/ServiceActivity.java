@@ -53,7 +53,7 @@ public class ServiceActivity extends AppCompatActivity {
     };
 
     private void initView() {
-        Button startService = findViewById(R.id.btn_start_service);
+        final Button startService = findViewById(R.id.btn_start_service);
         startService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +76,7 @@ public class ServiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MyService.class);
+//                startService(intent);
                 bindService(intent, mServiceConnection, BIND_AUTO_CREATE);
             }
         });
