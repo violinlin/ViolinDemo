@@ -103,7 +103,7 @@ public class StaggeredFragment extends BaseFragment {
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                int space= Util.dp2px(view.getContext(),6);
+                int space= Util.dp2px(view.getContext(),5);
                 outRect.left=outRect.right=outRect.top=outRect.bottom=space;
             }
         });
