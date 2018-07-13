@@ -74,4 +74,10 @@
         android:layout_height="wrap_content"
         android:text="kotlin"
         android:textAllCaps="false" />
+    <Button
+        android:id="@+id/btn_rxtest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RXTest"
+        android:textAllCaps="false" />
 </LinearLayout>

@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.net.Uri;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,19 +15,26 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.violin.firstkt.FirstKT;
-import com.violin.imageview.ImageViewActivity;
 import com.violin.imageview.ViewActivity;
-import com.violin.recyclerview.ReclyclerViewActivity;
 import com.violin.service.ServiceActivity;
 import com.violin.viewpager.VPActivity;
 import com.violin.violindemo.coco.CCActivity;
-import com.violin.violindemo.coco.SDKWrapper;
 import com.violin.webview.WebViewActivity;
 
 
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 public class MainActivity extends Activity {
+
+    private String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +100,6 @@ public class MainActivity extends Activity {
                 CCActivity.start(v.getContext());
 
 
-
 //                MainActivity.this.finish();
             }
         });
@@ -130,8 +137,51 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 FirstKT firstKT = new FirstKT();
                 firstKT.start(v.getContext());
-                getResources().getString(R.string.build_time);
             }
         });
+        findViewById(R.id.btn_rxtest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rxTest();
+            }
+        });
+    }
+
+
+    private void rxTest() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                emitter.onNext(Integer.parseInt("1q"));
+                emitter.onComplete();
+
+            }
+        })
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.d(TAG, "onNext:" + integer + "\n" + Thread.currentThread().getName());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onError:" + e.getMessage() + "\n" + Thread.currentThread().getName());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "onComplete:" + "\n" + Thread.currentThread().getName());
+
+                    }
+                });
+
+
     }
 }
