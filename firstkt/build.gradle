@@ -30,8 +30,5 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$rootProject.ext.supportLibraryVersion"
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     testImplementation 'junit:junit:4.12'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-}
-repositories {
-    mavenCentral()
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
