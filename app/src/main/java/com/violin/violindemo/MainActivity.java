@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.net.Uri;
 import android.provider.Settings;
 import android.os.Bundle;
@@ -18,7 +16,6 @@ import com.violin.firstkt.FirstKT;
 import com.violin.imageview.ViewActivity;
 import com.violin.service.ServiceActivity;
 import com.violin.viewpager.VPActivity;
-import com.violin.violindemo.coco.CCActivity;
 import com.violin.webview.WebViewActivity;
 
 
@@ -92,15 +89,6 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 VPActivity.start(v.getContext());
-            }
-        });
-        findViewById(R.id.btn_coco).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CCActivity.start(v.getContext());
-
-
-//                MainActivity.this.finish();
             }
         });
 
