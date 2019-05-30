@@ -2,9 +2,14 @@ package com.violin.imageview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,6 +22,29 @@ import android.widget.Button;
 public class ViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+
+
+        LayoutInflaterCompat.setFactory2(getLayoutInflater(), new LayoutInflater.Factory2() {
+            @Override
+            public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
+
+               if (name.equals("Button")){
+
+                   Button button = new Button(context, attrs);
+                   button.setTypeface(Typeface.createFromAsset(getAssets(),"ZCOOLKuaiLe-Regular.ttf"));
+                   return button;
+               }
+
+                return null;
+            }
+
+            @Override
+            public View onCreateView(String name, Context context, AttributeSet attrs) {
+                Log.d("whl  222",""+name+context.toString());
+                return null;
+            }
+        });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_layout);
         initView();
@@ -35,6 +63,13 @@ public class ViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ConstraintActivity.start(v.getContext());
+            }
+        });
+
+        findViewById(R.id.btn_typeface).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TypeFaceActivity.Companion.start(v.getContext());
             }
         });
     }

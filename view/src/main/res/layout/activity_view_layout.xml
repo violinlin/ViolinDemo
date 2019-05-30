@@ -20,4 +20,13 @@
         android:textAllCaps="false"
         android:text="ConstraintLayout"
         />
+
+    <Button
+        android:id="@+id/btn_typeface"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textAllCaps="false"
+        android:text="TypeFace(切换字体)"
+        />
 </LinearLayout>
