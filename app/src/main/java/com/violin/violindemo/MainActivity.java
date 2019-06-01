@@ -16,6 +16,7 @@ import com.violin.firstkt.FirstKT;
 import com.violin.imageview.ViewActivity;
 import com.violin.service.ServiceActivity;
 import com.violin.viewpager.VPActivity;
+import com.violin.violindemo.palette.PaletteActivity;
 import com.violin.webview.WebViewActivity;
 
 
@@ -131,6 +132,13 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 rxTest();
+            }
+        });
+
+        findViewById(R.id.btn_palette).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PaletteActivity.Companion.start(v.getContext());
             }
         });
     }

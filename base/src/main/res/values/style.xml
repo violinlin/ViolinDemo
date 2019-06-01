@@ -9,4 +9,11 @@
     <dimen name="divider">0.5dp</dimen>
     <!--分割线：底部导航-->
     <color name="divider_top_navi">#e0e0e0</color>
+    <style name="ViolinDemo" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor"></item>
+    </style>
 </resources>

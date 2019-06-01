@@ -31,11 +31,11 @@ class RVAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        return BookItemVH(LayoutInflater.from(parent!!.context).inflate(android.R.layout.simple_list_item_1, null));
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return BookItemVH(LayoutInflater.from(parent.context).inflate(android.R.layout.simple_list_item_1, null))
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is BookItemVH) {
             holder.bind(bookList[position])
         }

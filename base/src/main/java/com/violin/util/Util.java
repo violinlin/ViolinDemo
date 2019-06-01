@@ -2,6 +2,8 @@ package com.violin.util;
 
 import android.content.Context;
 
+
+
 /**
  * Created by wanghuilin on 2018/3/6.
  * <p>
@@ -10,7 +12,6 @@ import android.content.Context;
 
 public class Util {
     public static int dp2px(Context context,int dp){
-
         return (int) (context.getResources().getDisplayMetrics().density*dp+0.5f);
     }
 

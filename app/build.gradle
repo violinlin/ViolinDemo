@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -16,7 +18,7 @@ android {
             .substring(defaultConfig.applicationId.lastIndexOf(".") + 1)
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = name + "_" + buildType.name + "_V" + defaultConfig.versionName + "_" + today+".apk"
+            outputFileName = name + "_" + buildType.name + "_V" + defaultConfig.versionName + "_" + today + ".apk"
         }
     }
     //修改打包命名结束
@@ -49,6 +51,6 @@ dependencies {
     implementation project(':viewpager')
     implementation project(':service')
     implementation project(':webview')
-    implementation project(':base')
+    compile project(':base')
     implementation project(':firstkt')
 }

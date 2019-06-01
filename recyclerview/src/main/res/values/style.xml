@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!--tab item 字体大小设置-->
-    <style name="TabLayoutSize" >
-        <!--<item name="android:textSize">18sp</item>-->
-    </style>
-</resources>
