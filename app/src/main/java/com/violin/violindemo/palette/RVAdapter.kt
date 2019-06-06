@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.violin.violindemo.R
 
-class RVAdapter() : RecyclerView.Adapter<RVAdapter.ViewHolder>() {
+class RVAdapter : RecyclerView.Adapter<RVAdapter.ViewHolder>() {
 
     private val mData: ArrayList<ImageBean> = ArrayList()
 
