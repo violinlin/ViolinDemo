@@ -46,7 +46,7 @@ dependencies {
     implementation project(':activity')
     implementation project(':recyclerview')
     implementation project(':view')
-    //    implementation project(':glsurfaceview')
+    implementation project(':glsurfaceview')
     implementation project(':viewpager')
     implementation project(':service')
     implementation project(':webview')

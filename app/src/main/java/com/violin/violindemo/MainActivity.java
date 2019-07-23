@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.violin.firstkt.FirstKT;
+import com.violin.glsurfaceview.GLActivity;
 import com.violin.imageview.ViewActivity;
 import com.violin.service.ServiceActivity;
 import com.violin.viewpager.VPActivity;
@@ -82,7 +83,7 @@ public class MainActivity extends Activity {
         findViewById(R.id.btn_glsurfaceview).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                GLActivity.start(v.getContext());
+                GLActivity.start(v.getContext());
             }
         });
 
