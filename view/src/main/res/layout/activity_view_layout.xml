@@ -29,4 +29,8 @@
         android:textAllCaps="false"
         android:text="TypeFace(切换字体)"
         />
+    <com.violin.imageview.BatteryView
+        android:layout_width="16dp"
+        android:src="@drawable/reader_batty_icon"
+        android:layout_height="11dp"/>
 </LinearLayout>

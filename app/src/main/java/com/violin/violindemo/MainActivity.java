@@ -1,12 +1,18 @@
 package com.violin.violindemo;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -54,7 +60,8 @@ public class MainActivity extends Activity {
                 intent.addCategory("com.violin.category");
 
                 PackageManager packageManager = getPackageManager();
-                List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent,
+                        PackageManager.MATCH_DEFAULT_ONLY);
                 if (resolveInfos != null && resolveInfos.size() > 0) {
                     v.getContext().startActivity(intent);
                 } else {
@@ -142,6 +149,32 @@ public class MainActivity extends Activity {
                 PaletteActivity.Companion.start(v.getContext());
             }
         });
+
+        findViewById(R.id.btn_notify).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showNotify();
+            }
+        });
+    }
+
+    private void showNotify() {
+        NotificationManager nftmgr = (NotificationManager) getSystemService(
+                Context.NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+            //只在Android O之上需要渠道
+            NotificationChannel notificationChannel = new NotificationChannel("channelid1","channelname",NotificationManager.IMPORTANCE_HIGH);
+            //如果这里用IMPORTANCE_NOENE就需要在系统的设置里面开启渠道，通知才能正常弹出
+            nftmgr.createNotificationChannel(notificationChannel);
+        }
+        Notification preNTF = new NotificationCompat.Builder(getApplicationContext())
+                .setSmallIcon(getApplicationContext().getApplicationInfo().icon)
+                .setContentTitle("text")
+                .setContentText("message").build();
+        preNTF.when = System.currentTimeMillis();
+        preNTF.flags = Notification.FLAG_AUTO_CANCEL;
+
+        nftmgr.notify(1,preNTF);
     }
 
 
@@ -154,9 +187,9 @@ public class MainActivity extends Activity {
 
             }
         })
-        .subscribeOn(Schedulers.newThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<Integer>() {
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Integer>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
@@ -169,7 +202,8 @@ public class MainActivity extends Activity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, "onError:" + e.getMessage() + "\n" + Thread.currentThread().getName());
+                        Log.d(TAG, "onError:" + e.getMessage() + "\n"
+                                + Thread.currentThread().getName());
                     }
 
                     @Override
