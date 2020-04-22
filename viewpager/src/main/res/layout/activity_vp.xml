@@ -7,14 +7,14 @@
     android:orientation="vertical"
     tools:context="com.violin.viewpager.VPActivity">
 
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout"
         app:tabSelectedTextColor="#be1b1b"
         app:tabTextColor="#3b3a3a"
         app:tabBackground="@android:color/holo_red_light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

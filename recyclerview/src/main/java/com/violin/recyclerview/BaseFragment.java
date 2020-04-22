@@ -1,6 +1,6 @@
 package com.violin.recyclerview;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by wanghuilin on 2018/3/6.

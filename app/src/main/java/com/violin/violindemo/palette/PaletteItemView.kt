@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import android.support.v7.graphics.Palette
+import androidx.palette.graphics.Palette
 import android.view.View
 import android.widget.FrameLayout
 import com.bumptech.glide.Glide
@@ -39,9 +39,9 @@ class PaletteItemView : FrameLayout {
     private fun setUIColor(bitmap: Bitmap) {
 
 
-        Palette.from(bitmap).generate { palette ->
+        androidx.palette.graphics.Palette.from(bitmap).generate { palette ->
 
-                    val dominantSwatch = palette.dominantSwatch
+                    val dominantSwatch = palette?.dominantSwatch
                     dominantSwatch?.let {
                         tv_dominant1.setBackgroundColor(it.rgb)
                         tv_dominant2.setBackgroundColor(it.rgb)
@@ -58,19 +58,19 @@ class PaletteItemView : FrameLayout {
 
                     }
 
-                    val mutedSwatch = palette.mutedSwatch
+                    val mutedSwatch = palette?.mutedSwatch
                     mutedSwatch?.let {
                         tv_muted.setTextColor(it.bodyTextColor)
                         tv_muted.setBackgroundColor(it.rgb)
                     }
-                    val darkMutedSwatch = palette.darkMutedSwatch
+                    val darkMutedSwatch = palette?.darkMutedSwatch
                     darkMutedSwatch?.let {
                         tv_dark_muted.setTextColor(it.bodyTextColor)
                         tv_dark_muted.setBackgroundColor(it.rgb)
 
                     }
 
-                    val lightMutedSwatch = palette.lightMutedSwatch
+                    val lightMutedSwatch = palette?.lightMutedSwatch
 
                     lightMutedSwatch?.let {
                         tv_light_muted.setTextColor(it.bodyTextColor)
@@ -78,19 +78,19 @@ class PaletteItemView : FrameLayout {
                     }
 
 
-                    val vibrantSwatch = palette.vibrantSwatch
+                    val vibrantSwatch = palette?.vibrantSwatch
                     vibrantSwatch?.let {
                         tv_vibrant.setTextColor(it.bodyTextColor)
                         tv_vibrant.setBackgroundColor(it.rgb)
                     }
 
-                    val darkVibrantSwatch = palette.darkVibrantSwatch
+                    val darkVibrantSwatch = palette?.darkVibrantSwatch
                     darkVibrantSwatch?.let {
                         tv_dark_vibrant.setTextColor(it.bodyTextColor)
                         tv_dark_vibrant.setBackgroundColor(it.rgb)
                     }
 
-                    val lightVibrantSwatch = palette.lightVibrantSwatch
+                    val lightVibrantSwatch = palette?.lightVibrantSwatch
                     lightVibrantSwatch?.let {
                         tv_light_vibrant.setTextColor(it.bodyTextColor)
                         tv_light_vibrant.setBackgroundColor(it.rgb)

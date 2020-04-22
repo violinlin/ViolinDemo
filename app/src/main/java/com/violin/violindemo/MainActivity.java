@@ -12,7 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;

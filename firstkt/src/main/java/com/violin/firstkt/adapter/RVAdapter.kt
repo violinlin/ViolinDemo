@@ -1,6 +1,6 @@
 package com.violin.firstkt.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.violin.firstkt.bean.Book
@@ -12,7 +12,7 @@ import kotlin.collections.ArrayList
  * Mail: huilin_wang@dingyuegroup.cn
  * Desc:
  */
-class RVAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RVAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
      var bookList: ArrayList<Book> = ArrayList()
 
     fun addData(books: ArrayList<Book>) {
@@ -31,11 +31,11 @@ class RVAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         return BookItemVH(LayoutInflater.from(parent.context).inflate(android.R.layout.simple_list_item_1, null))
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         if (holder is BookItemVH) {
             holder.bind(bookList[position])
         }

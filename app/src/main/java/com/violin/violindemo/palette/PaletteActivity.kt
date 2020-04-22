@@ -5,21 +5,22 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Rect
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.violin.util.Util
 import com.violin.violindemo.R
 import kotlinx.android.synthetic.main.activity_palette.*
 import java.util.ArrayList
-import android.support.v7.graphics.Palette
+import androidx.palette.graphics.Palette
 import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import android.graphics.Color
+import com.google.android.material.appbar.AppBarLayout
 
 
 class PaletteActivity : AppCompatActivity() {
@@ -44,33 +45,28 @@ class PaletteActivity : AppCompatActivity() {
         }
 
 
-        val linearLayoutManager = LinearLayoutManager(this)
+        val linearLayoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
 
 
         recyclerView.layoutManager = linearLayoutManager
         val rvAdapter = RVAdapter()
-
-
-        appbar.addOnOffsetChangedListener { _, verticalOffset ->
+        appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
             Log.d(TAG, "appbar verOffset $verticalOffset")
             if (verticalOffset == 0) {
                 lastPosition = -1
                 setUiColor("picture1")
             }
-        }
+        })
 
-        recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+        recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration(){
+            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 val position = parent.getChildAdapterPosition(view)
                 val space = Util.dp2px(view.context, 5)
                 if (position == 0) {
                     outRect.top = space
                 }
                 outRect.bottom = space
-
             }
-
-
         })
 
 
@@ -85,13 +81,13 @@ class PaletteActivity : AppCompatActivity() {
 
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 Log.d(TAG, "recyclerView scroll -- dx:$dx dy:$dy y:${recyclerView?.y.toString()}")
 
                 val position = linearLayoutManager.findFirstVisibleItemPosition()
-                if (position != lastPosition && dy !=0 ) {
+                if (position != lastPosition && dy != 0) {
                     val path = data.get(position).path
 
 
@@ -103,7 +99,7 @@ class PaletteActivity : AppCompatActivity() {
 
             }
 
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })
@@ -118,7 +114,7 @@ class PaletteActivity : AppCompatActivity() {
                     override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
 
 
-                        Palette.from(resource).generate { palette ->
+                        androidx.palette.graphics.Palette.from(resource).generate { palette ->
                             palette?.let {
 
                                 val dominantSwatch = it.dominantSwatch

@@ -1,12 +1,12 @@
 package com.violin.violindemo.palette
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.violin.violindemo.R
 
-class RVAdapter : RecyclerView.Adapter<RVAdapter.ViewHolder>() {
+class RVAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<RVAdapter.ViewHolder>() {
 
     private val mData: ArrayList<ImageBean> = ArrayList()
 
@@ -33,7 +33,7 @@ class RVAdapter : RecyclerView.Adapter<RVAdapter.ViewHolder>() {
 
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
     }
 }

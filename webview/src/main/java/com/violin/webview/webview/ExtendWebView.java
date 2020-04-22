@@ -6,8 +6,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +25,6 @@ import android.widget.ProgressBar;
 import com.violin.webview.R;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 
 /**

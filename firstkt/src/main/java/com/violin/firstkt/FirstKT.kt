@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -61,9 +61,9 @@ class FirstKT : Activity() {
 
         })
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val manager = LinearLayoutManager(this)
-        manager.orientation = LinearLayoutManager.VERTICAL
+        val recyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerview)
+        val manager = androidx.recyclerview.widget.LinearLayoutManager(this)
+        manager.orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
         recyclerView.layoutManager = manager
         val adapter = RVAdapter()
         recyclerView.adapter = adapter

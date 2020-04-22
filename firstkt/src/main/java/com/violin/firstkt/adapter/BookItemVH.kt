@@ -1,6 +1,6 @@
 package com.violin.firstkt.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import com.violin.firstkt.bean.Book
@@ -11,7 +11,7 @@ import com.violin.firstkt.bean.Book
  * Mail: huilin_wang@dingyuegroup.cn
  * Desc:
  */
-class BookItemVH(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+class BookItemVH(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     private val textTV = itemView!!.findViewById<TextView>(android.R.id.text1)
     fun bind(book: Book) {
         textTV.text = book.bookName
