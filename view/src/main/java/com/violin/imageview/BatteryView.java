@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
@@ -64,7 +64,9 @@ public class BatteryView extends AppCompatImageView {
     private void getRect() {
         if (!isChecked) {
             isChecked = true;
-            mBitmap = ((BitmapDrawable) getDrawable()).getBitmap();
+//            mBitmap = ((BitmapDrawable) getDrawable()).getBitmap();
+            mBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.reader_batty_icon);
+            setImageBitmap(mBitmap);
             mBitmapWidth = mBitmap.getWidth();
             mBitmapHeight = mBitmap.getHeight();
             for (int i = 0; i < mBitmapWidth; i++) {
