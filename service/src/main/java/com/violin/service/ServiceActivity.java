@@ -2,11 +2,14 @@ package com.violin.service;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,22 +31,28 @@ public class ServiceActivity extends AppCompatActivity {
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.d("whl", "onServiceConnected");
+            Log.d("MyService", "onServiceConnected");
             mProgressBindler = (MyService.MyBindler) service;
+            mProgressBindler.init();
 
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.d("whl", "onServiceDisconnected");
+            Log.d("MyService", "onServiceDisconnected");
 
+        }
+
+        @Override
+        public void onBindingDied(ComponentName name) {
+            Log.d("MyService", "onBindingDied");
         }
     };
 
     private ServiceConnection mAIDLConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            mStub =  IRemoteService.Stub.asInterface(service);
+            mStub = IRemoteService.Stub.asInterface(service);
         }
 
         @Override
@@ -84,7 +93,25 @@ public class ServiceActivity extends AppCompatActivity {
         findViewById(R.id.btn_unbind_service).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                unbindService(mServiceConnection);
+                if (mProgressBindler != null) {
+                    unbindService(mServiceConnection);
+                    mProgressBindler = null;
+                }
+            }
+        });
+        findViewById(R.id.btn_intent_service).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyIntentService.startIntentService(ServiceActivity.this, "intentService");
+            }
+        });
+
+        findViewById(R.id.btn_bind_stop).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mProgressBindler != null) {
+                    mProgressBindler.stop();
+                }
             }
         });
 
@@ -106,9 +133,9 @@ public class ServiceActivity extends AppCompatActivity {
         findViewById(R.id.btn_getAIDL_id).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mStub!=null){
+                if (mStub != null) {
                     try {
-                        Log.d("whl","AIDL-Pid"+mStub.getPid());
+                        Log.d("whl", "AIDL-Pid" + mStub.getPid());
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }

@@ -1,10 +1,19 @@
 package com.violin.service;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Binder;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
 
 public class MyService extends Service {
 
@@ -17,7 +26,46 @@ public class MyService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate");
+        showNotify();
 
+    }
+
+    private void showNotify() {
+        String notifyChannel = "service";
+        NotificationManager manager = (NotificationManager) getSystemService(
+                Context.NOTIFICATION_SERVICE);
+        /**
+         * 8.0及以上系统需要配置NotificationChannel
+         * 如果没配置，{@link #startForeground(int, Notification)}
+         * 会抛出 invalid channel for service notification 异常
+         *
+         */
+        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            //channelname 用户可以在设置界面调整不同渠道的通知显示信息
+            NotificationChannel notificationChannel = new NotificationChannel(notifyChannel,
+                    "service", NotificationManager.IMPORTANCE_HIGH);
+
+            manager.createNotificationChannel(notificationChannel);
+        }
+
+        Intent intent = new Intent(this,ServiceActivity.class);
+
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
+
+        Notification preNTF = new NotificationCompat.Builder(getApplicationContext(),
+                notifyChannel)//notifyChannel 需要和 NotificationChannel中设置相同，通知才会弹出
+                .setContentTitle("service" )
+                .setContentText("message")
+                .setSmallIcon(getApplicationContext().getApplicationInfo().icon)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.test1))
+                .setContentIntent(pendingIntent)
+                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.picture1)))
+                .setAutoCancel(true)
+                .build();
+
+
+        startForeground(1000, preNTF);//每个notifyID 对应一条通知，如果id相同，会在原来通知面板上更新内容
     }
 
     @Override
@@ -43,7 +91,7 @@ public class MyService extends Service {
 
     class MyBindler extends Binder {
         public void init() {
-
+            Log.d(TAG, "MyBindler init()");
         }
 
         public void play() {
@@ -55,7 +103,7 @@ public class MyService extends Service {
         }
 
         public void stop() {
-
+            Log.d(TAG, "MyBindler stop()");
         }
     }
 }

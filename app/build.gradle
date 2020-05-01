@@ -50,6 +50,6 @@ dependencies {
     implementation project(':viewpager')
     implementation project(':service')
     implementation project(':webview')
-    compile project(':base')
+    api project(':base')
     implementation project(':firstkt')
 }

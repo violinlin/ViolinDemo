@@ -33,6 +33,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="解绑服务" />
+    <Button
+        android:id="@+id/btn_bind_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bind stop" />
+    <Button
+        android:id="@+id/btn_intent_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="StartIntentService" />
 
     <Button
         android:id="@+id/btn_bind_AIDL_service"
