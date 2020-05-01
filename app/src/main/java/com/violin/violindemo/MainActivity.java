@@ -4,15 +4,19 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.os.Bundle;
+
 import androidx.core.app.NotificationCompat;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -158,23 +162,39 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void showNotify() {
-        NotificationManager nftmgr = (NotificationManager) getSystemService(
-                Context.NOTIFICATION_SERVICE);
-        if(Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
-            //只在Android O之上需要渠道
-            NotificationChannel notificationChannel = new NotificationChannel("channelid1","channelname",NotificationManager.IMPORTANCE_HIGH);
-            //如果这里用IMPORTANCE_NOENE就需要在系统的设置里面开启渠道，通知才能正常弹出
-            nftmgr.createNotificationChannel(notificationChannel);
-        }
-        Notification preNTF = new NotificationCompat.Builder(getApplicationContext())
-                .setSmallIcon(getApplicationContext().getApplicationInfo().icon)
-                .setContentTitle("text")
-                .setContentText("message").build();
-        preNTF.when = System.currentTimeMillis();
-        preNTF.flags = Notification.FLAG_AUTO_CANCEL;
+    private int notifyID = 1;
 
-        nftmgr.notify(1,preNTF);
+    private void showNotify() {
+        String notifyChannel = "test";
+        NotificationManager manager = (NotificationManager) getSystemService(
+                Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {// 8.0及以上系统需要配置NotificationChannel
+            //只在Android O之上需要渠道
+            //channelname 用户可以在设置界面调整不同渠道的通知显示信息
+            NotificationChannel notificationChannel = new NotificationChannel(notifyChannel,
+                    "channelname", NotificationManager.IMPORTANCE_HIGH);
+            //如果这里用IMPORTANCE_NOENE就需要在系统的设置里面开启渠道，通知才能正常弹出
+            manager.createNotificationChannel(notificationChannel);
+        }
+
+        Intent intent = new Intent(this,PaletteActivity.class);
+
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
+
+        Notification preNTF = new NotificationCompat.Builder(getApplicationContext(),
+                notifyChannel)//notifyChannel 需要和 NotificationChannel中设置相同，通知才会弹出
+                .setContentTitle("text:" + notifyID)
+                .setContentText("message")
+                .setSmallIcon(getApplicationContext().getApplicationInfo().icon)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.test))
+                .setContentIntent(pendingIntent)
+                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.picture1)))
+                .setAutoCancel(true)
+                .build();
+
+
+        manager.notify(Math.min(notifyID++, 3), preNTF);//每个notifyID 对应一条通知，如果id相同，会在原来通知面板上更新内容
     }
 
 
