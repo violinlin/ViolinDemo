@@ -122,7 +122,7 @@ class PaletteActivity : AppCompatActivity() {
                                 collapsing_tool_bar.setCollapsedTitleTextColor(dominantSwatch!!.bodyTextColor)
                                 //
 
-                                collapsing_tool_bar.setExpandedTitleColor(dominantSwatch!!.bodyTextColor)
+                                collapsing_tool_bar.setExpandedTitleColor(it.darkVibrantSwatch?.bodyTextColor?:Color.WHITE)
 
                                 tool_bar.navigationIcon?.let {
                                     it.clearColorFilter()
