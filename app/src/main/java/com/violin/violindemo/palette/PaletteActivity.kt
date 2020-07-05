@@ -1,5 +1,7 @@
 package com.violin.violindemo.palette
 
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -20,6 +22,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.animation.AlphaAnimation
+import android.view.animation.TranslateAnimation
 import com.google.android.material.appbar.AppBarLayout
 
 
@@ -135,6 +140,14 @@ class PaletteActivity : AppCompatActivity() {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                     window.statusBarColor = changeColor(dominantSwatch!!.rgb)
                                 }
+                                 (btn_float.background as? ColorDrawable)?.let {
+                                     val colorAnim = ObjectAnimator.ofInt(btn_float,"backgroundColor",it.color,palette.getMutedColor(it.color))
+                                     colorAnim.setEvaluator(ArgbEvaluator())
+                                     colorAnim.duration = 300
+                                     colorAnim.start()
+
+                                 }
+
 
                             }
                         }
