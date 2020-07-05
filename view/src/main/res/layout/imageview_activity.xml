@@ -13,6 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="裁剪" />
+    <com.violin.imageview.DrawableView
+        android:background="#304FFE"
+        android:layout_width="200dp"
+        android:layout_height="100dp"/>
 
     <ImageView
         android:id="@+id/image"
@@ -61,4 +65,6 @@
         app:round_border_width="5dp"
         app:round_corner_radius="10dp"
         app:round_oval="true" />
+
+
 </LinearLayout>
