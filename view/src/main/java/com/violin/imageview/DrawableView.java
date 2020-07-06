@@ -24,7 +24,7 @@ public class DrawableView extends View {
             @Nullable AttributeSet attrs) {
         super(context, attrs);
         gradientDrawable = new GradientDrawable();
-        gradientDrawable.setColor(Color.RED);
+        gradientDrawable.setColors(new int[]{Color.RED,Color.WHITE});
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);
         gradientDrawable.setCornerRadius(Util.dp2px(getContext(),5));
 
@@ -38,10 +38,10 @@ public class DrawableView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-//        gradientDrawable.setBounds(0,0,getWidth(),getHeight());
-//        gradientDrawable.draw(canvas);
-        RectF rectF = new RectF(getWidth()/2-100,0,getWidth(),getHeight());
-        canvas.drawRoundRect(rectF,getWidth()/2,getWidth()/2,paint);
+        gradientDrawable.setBounds(0,0,getWidth(),getHeight());
+        gradientDrawable.draw(canvas);
+//        RectF rectF = new RectF(getWidth()/2-100,0,getWidth(),getHeight());
+//        canvas.drawRoundRect(rectF,getWidth()/2,getWidth()/2,paint);
 
     }
 }

@@ -33,7 +33,11 @@
         android:layout_width="16dp"
         android:src="@drawable/reader_batty_icon"
         android:layout_height="11dp"/>
-    <com.violin.imageview.view.AvatarView
+    <com.violin.imageview.view.MateriaEditText
+        android:hint="输入名称"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.violin.imageview.view.SportView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>
