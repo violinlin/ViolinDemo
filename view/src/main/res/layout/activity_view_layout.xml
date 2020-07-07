@@ -37,6 +37,11 @@
         android:hint="输入名称"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+   <com.violin.imageview.view.FlowLayout
+       android:background="#59574747"
+       android:id="@+id/flowlayout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
     <com.violin.imageview.view.SportView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
