@@ -2,47 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-<Button
-    android:id="@+id/btn_round"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:text="圆角图片"
-    />
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/btn_round"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="圆角图片" />
 
     <Button
         android:id="@+id/btn_constraintlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:textAllCaps="false"
         android:text="ConstraintLayout"
-        />
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_typeface"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:textAllCaps="false"
         android:text="TypeFace(切换字体)"
-        />
+        android:textAllCaps="false" />
     <com.violin.imageview.BatteryView
         android:layout_width="16dp"
-        android:src="@drawable/reader_batty_icon"
-        android:layout_height="11dp"/>
+        android:layout_height="11dp"
+        android:src="@drawable/reader_batty_icon" />
     <com.violin.imageview.view.MateriaEditText
-        android:hint="输入名称"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-   <com.violin.imageview.view.FlowLayout
-       android:background="#59574747"
-       android:id="@+id/flowlayout"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"/>
-    <com.violin.imageview.view.ScaleImageView
+        android:layout_height="wrap_content"
+        android:hint="输入名称" />
+    <com.violin.imageview.view.FlowLayout
+        android:id="@+id/flowlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:background="#59574747" />
+    <com.violin.imageview.view.TwoPageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary" />
+    </com.violin.imageview.view.TwoPageView>
 </LinearLayout>
