@@ -118,6 +118,16 @@ public class BatteryView extends AppCompatImageView {
         }
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        try {
+            getContext().unregisterReceiver(mBatInfoReceiver);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public  void clean() {
         synchronized (BatteryView.class) {
             if (mBatInfoReceiver != null) {

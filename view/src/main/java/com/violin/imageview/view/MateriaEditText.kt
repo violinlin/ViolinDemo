@@ -74,7 +74,6 @@ class MateriaEditText : androidx.appcompat.widget.AppCompatEditText {
         textPaint.alpha = (255 * floatOffset).toInt()
         val offset = hint_text_offset * (1 - floatOffset)
         canvas?.drawText(hint.toString(), 0f, hint_text_height + offset, textPaint)
-        Log.d("whl","offset : {$offset}")
 
     }
 }

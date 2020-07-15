@@ -81,7 +81,7 @@ public class ViewActivity extends AppCompatActivity {
 
         FlowLayout flowLayout = findViewById(R.id.flowlayout);
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 1; i++) {
             flowLayout.addView(new ShapeTextView(this));
         }
     }

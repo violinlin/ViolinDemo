@@ -4,7 +4,9 @@ import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import android.view.ViewGroup
 import com.violin.util.Util
 
@@ -58,8 +60,46 @@ class FlowLayout : ViewGroup {
         }
         val wantedHeight = heightUsed + lineHeight + paddingBottom
         Log.d("FlowLayout", "floatWidth:${flowWidth} wantedHeight ${wantedHeight}")
-        setMeasuredDimension(flowWidth, View.resolveSize(wantedHeight,heightMeasureSpec))
+        setMeasuredDimension(flowWidth, View.resolveSize(wantedHeight, heightMeasureSpec))
     }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        Log.d("FlowLayout", "dispatchTouchEvent ${ev?.action}")
+        return super.dispatchTouchEvent(ev)
+    }
+
+    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+        Log.d("FlowLayout", "onInterceptTouchEvent ${ev?.action}")
+        var downX = 0f
+        var intercept = false
+        ev?.let {
+            when (ev?.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    downX = it.getX()
+
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    if (Math.abs(it.getX() - downX) > ViewConfiguration.get(context).scaledTouchSlop) {
+                        intercept = true
+                    }
+
+                }
+            }
+        }
+
+
+        return intercept
+    }
+
+    override fun onTouchEvent(ev: MotionEvent?): Boolean {
+        Log.d("FlowLayout", "onTouchEvent ${ev?.action}")
+        if (ev?.action == MotionEvent.ACTION_DOWN) {
+            return true
+        }
+        return super.onTouchEvent(ev)
+
+    }
+
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
 

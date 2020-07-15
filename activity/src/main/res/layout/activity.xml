@@ -4,13 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.violin.activity.MainActivity">
 
-  <Button
-      android:id="@+id/btn_dialog"
-      android:textAllCaps="false"
-      android:text="DialogActivity"
-      android:layout_margin="16dp"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_dialog_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="DialogActivity"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Dialog"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Main"
+        android:textAllCaps="false" />
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.violin.activity.AFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
