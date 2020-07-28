@@ -25,9 +25,17 @@ class MyIntentService : IntentService("MyIntentService") {
         }
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        Log.d(TAG, "onCreate")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "onDestroy")
+        Thread.currentThread().isInterrupted
+        Thread.currentThread().interrupt()
+        Thread.interrupted()
     }
 
 
@@ -38,12 +46,12 @@ class MyIntentService : IntentService("MyIntentService") {
          *
          * @see IntentService
          */
-        // TODO: Customize helper method
         @JvmStatic
         fun startIntentService(context: Context, param1: String) {
             val intent = Intent(context, MyIntentService::class.java).apply {
                 putExtra("param", param1)
             }
+
             context.startService(intent)
         }
 

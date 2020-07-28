@@ -3,6 +3,7 @@ package com.violin.imageview;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -84,7 +85,16 @@ public class ViewActivity extends AppCompatActivity {
         for (int i = 0; i < 1; i++) {
             flowLayout.addView(new ShapeTextView(this));
         }
+
+        new AsyncTask<String,String,Integer>(){
+
+            @Override
+            protected Integer doInBackground(String... strings) {
+                return null;
+            }
+        }.execute("");
     }
+
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ViewActivity.class);

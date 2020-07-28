@@ -22,9 +22,9 @@ public class Singleton {
      */
     public static Singleton getInstance(){
 
-        if (singleton == null){
-            synchronized (Singleton.class){
-                if (singleton == null){
+        if (singleton == null){// 例如线程a、b都执行到了此处 。 如果b进入了同步代码块，又有c线程调用getInstance,外层判断可以不等b释放锁，直接返回singleton
+            synchronized (Singleton.class){// 线程a先获取锁，执行初始化逻辑，赋值后释放锁
+                if (singleton == null){//线程a释放锁后，线程b获得锁，进入同步代码块，此时singleton已经被a线程赋值，直接返回singleton，
                     singleton = new Singleton();
                 }
             }
