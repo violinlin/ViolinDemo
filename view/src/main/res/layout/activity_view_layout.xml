@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <Button
         android:id="@+id/btn_round"
         android:layout_width="match_parent"
@@ -25,18 +26,28 @@
         android:padding="16dp"
         android:text="TypeFace(切换字体)"
         android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_view2bitmap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ViewToBitmap"
+        android:textAllCaps="false" />
+
     <com.violin.imageview.BatteryView
         android:layout_width="16dp"
         android:layout_height="11dp"
         android:src="@drawable/reader_batty_icon" />
-    <com.violin.imageview.view.MateriaEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="输入名称" />
+
     <com.violin.imageview.view.FlowLayout
         android:id="@+id/flowlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#59574747" />
+
+    <com.violin.imageview.view.MateriaEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入名称" />
 
 </LinearLayout>

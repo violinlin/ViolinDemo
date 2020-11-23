@@ -33,7 +33,7 @@ public class ViewActivity extends AppCompatActivity {
         LayoutInflaterCompat.setFactory2(getLayoutInflater(), new LayoutInflater.Factory2() {
             @Override
             public View onCreateView(View parent, String name, Context context,
-                    AttributeSet attrs) {
+                                     AttributeSet attrs) {
 
                 if (name.equals("Button")) {
 
@@ -86,13 +86,20 @@ public class ViewActivity extends AppCompatActivity {
             flowLayout.addView(new ShapeTextView(this));
         }
 
-        new AsyncTask<String,String,Integer>(){
+        new AsyncTask<String, String, Integer>() {
 
             @Override
             protected Integer doInBackground(String... strings) {
                 return null;
             }
         }.execute("");
+
+        findViewById(R.id.btn_view2bitmap).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SaveViewActivity.Companion.start(v.getContext());
+            }
+        });
     }
 
 
