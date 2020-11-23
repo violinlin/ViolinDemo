@@ -1,5 +1,6 @@
 package com.violin.violindemo;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -15,6 +16,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import android.util.Log;
@@ -44,6 +46,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivity extends Activity {
 
     private String TAG = MainActivity.class.getSimpleName();
+    private String permission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +163,56 @@ public class MainActivity extends Activity {
                 showNotify();
             }
         });
+
+        initPermission();
+    }
+
+    private void initPermission() {
+        permission = Manifest.permission.READ_PHONE_STATE;
+        findViewById(R.id.btn_has_permission).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    int result = MainActivity.this.checkSelfPermission(permission);
+                    Toast.makeText(getApplication(),"check permission result :" + result, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        findViewById(R.id.btn_hint_permission).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    /**
+                     * 首次安装，没有权限，shouldShow 返回false
+                     * 如果已经授予权限，shouldShow 返回false
+                     * 用户拒绝权限，shoudlShow 返回true
+                     * 用户拒绝权限，并且勾选不再显示，返回false
+                      */
+
+
+                    boolean result = MainActivity.this.shouldShowRequestPermissionRationale(permission);
+                    Toast.makeText(getApplication(),"shouldShow permission result :" + result, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        findViewById(R.id.btn_request_permission).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    MainActivity.this.requestPermissions(new String[]{permission},100);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            Toast.makeText(getApplication(),"request permission result :" + grantResults[0], Toast.LENGTH_SHORT).show();
+        }
     }
 
     private int notifyID = 1;

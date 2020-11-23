@@ -86,4 +86,29 @@
         android:layout_height="wrap_content"
         android:text="通知"
         android:textAllCaps="false" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_has_permission"
+            android:layout_width="0dp"
+            android:text="是否有权限"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/btn_request_permission"
+            android:layout_width="0dp"
+            android:text="请求权限"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/btn_hint_permission"
+            android:layout_width="0dp"
+            android:text="是否解释权限"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </LinearLayout>
