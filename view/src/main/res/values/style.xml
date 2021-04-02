@@ -8,4 +8,12 @@
         <attr name="round_oval" format="boolean" /><!--圆形/圆角矩形-->
         <attr name="round_corner_radius" format="dimension" /><!--圆角半径-->
     </declare-styleable>
+    <declare-styleable name="AspectRatioFrameLayout">
+        <attr name="aspect_ratio" format="string"/>
+        <attr name="aspect_radius" format="dimension"/>
+        <attr name="aspect_left_top_radius" format="dimension" />
+        <attr name="aspect_right_top_radius" format="dimension" />
+        <attr name="aspect_right_bottom_radius" format="dimension" />
+        <attr name="aspect_left_bottom_radius" format="dimension" />
+    </declare-styleable>
 </resources>
