@@ -37,3 +37,45 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
+project.afterEvaluate {  //3.1
+    println("processManifest: " + getVariantName())
+    String variantName = getVariantName()
+    project.tasks.getByName("process${variantName}Manifest").doLast {
+        String maniFestPath = getProjectDir().getAbsolutePath() + "/build/intermediates/library_manifest/${variantName.toLowerCase()}/AndroidManifest.xml"
+        if (file(maniFestPath).exists()) {
+            def xmlParser = new XmlParser()
+            def manifestXml = xmlParser.parse(maniFestPath)
+            println("------------- start remove permission -------------")
+            manifestXml.each {
+                if ("uses-permission".equalsIgnoreCase(it.name())) {
+                    it.attributes().values().each { name ->
+                        if (getRemovePermissionList().contains(name)) {
+                            manifestXml.remove(it)
+                            println("\t" + name)
+                        }
+                    }
+                }
+            }
+            println("------------- end  remove permission -------------")
+        }
+
+
+    }
+}
+
+List<String> getRemovePermissionList() {
+    List<String> removeList = new LinkedList<>()
+    removeList.add("android.permission.INTERNET")
+    return removeList
+}
+
+def getVariantName() {
+    def name = gradle.startParameter.taskNames.toString()
+    if (name.contains("Debug")) {
+        return "Debug"
+    }
+    return "Release"
+}
+
+
+
