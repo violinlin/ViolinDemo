@@ -37,35 +37,44 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
-project.afterEvaluate {  //3.1
+project.afterEvaluate {
     println("processManifest: " + getVariantName())
     String variantName = getVariantName()
     project.tasks.getByName("process${variantName}Manifest").doLast {
+        println("task name " + project.name)
         String maniFestPath = getProjectDir().getAbsolutePath() + "/build/intermediates/library_manifest/${variantName.toLowerCase()}/AndroidManifest.xml"
         if (file(maniFestPath).exists()) {
             def xmlParser = new XmlParser()
             def manifestXml = xmlParser.parse(maniFestPath)
+            def iterator = manifestXml.children().iterator()
+
             println("------------- start remove permission -------------")
-            manifestXml.each {
-                if ("uses-permission".equalsIgnoreCase(it.name())) {
-                    it.attributes().values().each { name ->
+            while (iterator.hasNext()) {
+                Node node = iterator.next()
+                if ("uses-permission".equalsIgnoreCase(node.name())) {
+                    node.attributes().values().each { name ->
                         if (getRemovePermissionList().contains(name)) {
-                            manifestXml.remove(it)
+                            iterator.remove()
+                            manifestXml.remove(node)
                             println("\t" + name)
                         }
                     }
                 }
             }
+            new File(maniFestPath).withWriter("UTF8") {
+                it.write(groovy.xml.XmlUtil.serialize(manifestXml))
+            }
+
             println("------------- end  remove permission -------------")
         }
-
-
     }
 }
 
 List<String> getRemovePermissionList() {
-    List<String> removeList = new LinkedList<>()
-    removeList.add("android.permission.INTERNET")
+    List<String> removeList = new ArrayList<>()
+    removeList.add("android.permission.READ_PHONE_STATE")
+    removeList.add("android.permission.READ_EXTERNAL_STORAGE")
+    removeList.add("android.permission.WRITE_EXTERNAL_STORAGE")
     return removeList
 }
 
