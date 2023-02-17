@@ -6,7 +6,6 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
 
-
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -66,6 +65,32 @@ project.afterEvaluate {
             }
 
             println("------------- end  remove permission -------------")
+        }
+    }
+
+    project.afterEvaluate {
+        project.android.libraryVariants.all {
+            println("" + "variant")
+        }
+        project.configurations.each {
+            if (it.name == 'implementation' && !it.canBeResolved) {
+                project.configurations.implementation.setCanBeResolved(true)
+            }
+        }
+        project.configurations.each {
+            println("config" + it.name)
+            if (it.name.equalsIgnoreCase("implementation")) {
+                it.resolvedConfiguration.resolvedArtifacts.each { item ->
+                    String versionStr = item.getModuleVersion().toString()
+                    String groupName = versionStr.substring(0, versionStr.indexOf(":"))
+                    println("依赖" + groupName)
+                    println(item.getFile().getAbsoluteFile())
+
+
+                }
+            }
+
+
         }
     }
 }
