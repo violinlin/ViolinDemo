@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Adapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -21,6 +22,8 @@ import com.violin.firstkt.bean.Book
  * email:wanghuilin@zshiliu.com
  */
 class FirstKT : Activity() {
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +64,8 @@ class FirstKT : Activity() {
 
         })
 
-        val recyclerView = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerview)
+        val recyclerView =
+            findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerview)
         val manager = androidx.recyclerview.widget.LinearLayoutManager(this)
         manager.orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
         recyclerView.layoutManager = manager

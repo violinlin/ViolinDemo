@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.violin.util.Util
 import kotlin.random.Random

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.TypedValue;
 
+import leakcanary.LeakCanary;
+
 
 /**
  * Created by wanghuilin on 2018/3/6.

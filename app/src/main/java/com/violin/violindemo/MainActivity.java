@@ -33,7 +33,11 @@ import com.violin.violindemo.palette.PaletteActivity;
 import com.violin.webview.WebViewActivity;
 
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -42,6 +46,11 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MainActivity extends Activity {
 
@@ -169,17 +178,17 @@ public class MainActivity extends Activity {
 
     private void initPermission() {
         permission = Manifest.permission.READ_PHONE_STATE;
-        findViewById(R.id.btn_has_permission).setOnClickListener(new View.OnClickListener(){
+        findViewById(R.id.btn_has_permission).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     int result = MainActivity.this.checkSelfPermission(permission);
-                    Toast.makeText(getApplication(),"check permission result :" + result, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "check permission result :" + result, Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        findViewById(R.id.btn_hint_permission).setOnClickListener(new View.OnClickListener(){
+        findViewById(R.id.btn_hint_permission).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -188,11 +197,11 @@ public class MainActivity extends Activity {
                      * 如果已经授予权限，shouldShow 返回false
                      * 用户拒绝权限，shoudlShow 返回true
                      * 用户拒绝权限，并且勾选不再显示，返回false
-                      */
+                     */
 
 
                     boolean result = MainActivity.this.shouldShowRequestPermissionRationale(permission);
-                    Toast.makeText(getApplication(),"shouldShow permission result :" + result, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "shouldShow permission result :" + result, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -201,7 +210,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    MainActivity.this.requestPermissions(new String[]{permission},100);
+                    MainActivity.this.requestPermissions(new String[]{permission}, 100);
                 }
             }
         });
@@ -211,7 +220,7 @@ public class MainActivity extends Activity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 100) {
-            Toast.makeText(getApplication(),"request permission result :" + grantResults[0], Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplication(), "request permission result :" + grantResults[0], Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -230,10 +239,10 @@ public class MainActivity extends Activity {
             manager.createNotificationChannel(notificationChannel);
         }
 
-        Intent intent = new Intent(this,PaletteActivity.class);
+        Intent intent = new Intent(this, PaletteActivity.class);
 
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         Notification preNTF = new NotificationCompat.Builder(getApplicationContext(),
                 notifyChannel)//notifyChannel 需要和 NotificationChannel中设置相同，通知才会弹出
@@ -253,13 +262,13 @@ public class MainActivity extends Activity {
 
     private void rxTest() {
         Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
-                emitter.onNext(Integer.parseInt("1q"));
-                emitter.onComplete();
+                    @Override
+                    public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                        emitter.onNext(Integer.parseInt("1q"));
+                        emitter.onComplete();
 
-            }
-        })
+                    }
+                })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Integer>() {
@@ -287,5 +296,28 @@ public class MainActivity extends Activity {
                 });
 
 
+    }
+
+    private void okhttp() throws IOException {
+        HashMap map = new HashMap();
+//        map.put()
+        Hashtable hashtable = new Hashtable();
+//        hashtable.put();
+        ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
+//        View view = new View();
+//        view.post()
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+        okHttpClient.newCall(new Request.Builder().build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+            }
+        });
+//        okHttpClient.newCall(new Request.Builder().build()).execute()
     }
 }

@@ -3,12 +3,16 @@ package com.violin.util;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.LruCache;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class SubActivity extends AppCompatActivity {
     public static final String EXTRA_TITLE = "title";
@@ -24,7 +28,6 @@ public class SubActivity extends AppCompatActivity {
         setContentView(R.layout.base_activity_sub);
         mTitleLayout = (ViewStub) findViewById(R.id.layout_title);
 
-
         String title = getIntent().getStringExtra(EXTRA_TITLE);
         if (!TextUtils.isEmpty(title)) {
             setTitle(title);
@@ -39,7 +42,7 @@ public class SubActivity extends AppCompatActivity {
 
     protected Fragment getFragment(String name) {
         Bundle args = getIntent().getExtras();
-        mFragment = Fragment.instantiate( this, name, args);
+        mFragment = Fragment.instantiate(this, name, args);
         return mFragment;
     }
 
@@ -77,4 +80,6 @@ public class SubActivity extends AppCompatActivity {
     public interface SubListener {
         boolean canFinish();
     }
+
+
 }
