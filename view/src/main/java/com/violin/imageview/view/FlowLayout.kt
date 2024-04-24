@@ -80,7 +80,7 @@ class FlowLayout : ViewGroup {
                 }
                 MotionEvent.ACTION_MOVE -> {
                     if (Math.abs(it.getX() - downX) > ViewConfiguration.get(context).scaledTouchSlop) {
-                        intercept = true
+//                        intercept = true
                     }
 
                 }
@@ -94,7 +94,7 @@ class FlowLayout : ViewGroup {
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
         Log.d("FlowLayout", "onTouchEvent ${ev?.action}")
         if (ev?.action == MotionEvent.ACTION_DOWN) {
-            return true
+            return false
         }
         return super.onTouchEvent(ev)
 

@@ -1,59 +1,71 @@
 package com.violin.imageview.view
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
 import android.util.AttributeSet
-import android.util.TypedValue
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.violin.util.Util
 
-class SportView : View {
-    val bounds = RectF()
-    val paint: Paint = Paint()
-    val radius = Util.dp2px(150f)
-    var centerX = 0;
-    var centerY = 0;
+class SportsView : View {
+    val radius = Util.dp2px(80f)
+    var progress = 0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var arcRectF = RectF()
+    var paint = Paint(Paint.ANTI_ALIAS_FLAG)
+    var count:Int = 0;
 
-    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)
-
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        centerX = width / 2
-        centerY = height / 2
-        bounds.set(centerX - radius, centerY - radius, centerX + radius, centerY + radius)
-    }
+    constructor(context: Context?) : super(context)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     init {
-        paint.isAntiAlias = true
-
-
-        paint.strokeWidth = Util.dp2px(10f)
-
+        paint.textSize = Util.dp2px(40f)
         paint.textAlign = Paint.Align.CENTER
-
-        paint.textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,60f,resources.displayMetrics)
-
+        setOnClickListener { // 创建 ObjectAnimator 对象
+            val holder1 = PropertyValuesHolder.ofFloat("progress", 0f, 100f)
+            val holder2 = PropertyValuesHolder.ofFloat("translationX", 300f)
+            val animatorProcess =
+                ObjectAnimator.ofPropertyValuesHolder(this@SportsView, holder1, holder2)
+            animatorProcess.duration = 1000
+            animatorProcess.start()
+            count++
+            Toast.makeText(context,"toast:($count)",Toast.LENGTH_SHORT).show()
+            Log.d("SportView","toast")
+        }
     }
 
-    override fun onDraw(canvas: Canvas?) {
+
+    public override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        val centerX = (width / 2).toFloat()
+        val centerY = (height / 2).toFloat()
+        paint.color = Color.parseColor("#E91E63")
         paint.style = Paint.Style.STROKE
-        paint.color = Color.GRAY
-        canvas?.drawOval(bounds, paint)
-
-        paint.color = Color.RED
-        paint.strokeWidth = Util.dp2px(10f)
         paint.strokeCap = Paint.Cap.ROUND
-        canvas?.drawArc(bounds, -60f, 180f, false, paint)
-
+        paint.strokeWidth = Util.dp2px(15f)
+        arcRectF[centerX - radius, centerY - radius, centerX + radius] = centerY + radius
+        canvas.drawArc(arcRectF, 135f, progress * 3.6f, false, paint)
+        paint.color = Color.RED
         paint.style = Paint.Style.FILL
-        val react = Rect()
-        paint.getTextBounds("abc",0,"abc".length,react)
-
-        val offset = react.top + react.bottom
-        canvas?.drawText("abc", centerX.toFloat(),centerY.toFloat(),paint)
-
+        canvas.drawText(
+            progress.toInt().toString() + "%",
+            centerX,
+            centerY - (paint.ascent() + paint.descent()) / 2,
+            paint
+        )
     }
-
-
 }

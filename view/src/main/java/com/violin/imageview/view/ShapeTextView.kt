@@ -29,7 +29,10 @@ class ShapeTextView : View {
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        setMeasuredDimension(size.toInt() * 2 + paddingLeft + paddingRight, size.toInt() + paddingBottom + paddingTop)
+        setMeasuredDimension(
+            size.toInt() * 2 + paddingLeft + paddingRight,
+            size.toInt() + paddingBottom + paddingTop
+        )
     }
 
     init {
@@ -57,6 +60,7 @@ class ShapeTextView : View {
                     downX = it.getX()
 
                 }
+
                 MotionEvent.ACTION_MOVE -> {
                     if (Math.abs(it.getX() - downX) < ViewConfiguration.get(context).scaledTouchSlop) {
                         parent.requestDisallowInterceptTouchEvent(true)
@@ -75,13 +79,25 @@ class ShapeTextView : View {
 
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
         Log.d("ShapeTextView", "onTouchEvent ${ev?.action}")
-        return true
+        if (ev?.action == MotionEvent.ACTION_DOWN) {
+            return true
+
+        }
+        return false;
     }
 
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        canvas?.drawRoundRect(paddingLeft.toFloat(), paddingTop.toFloat(), paddingRight.toFloat() + size * 2, paddingBottom.toFloat() + size, Util.dp2px(3f), Util.dp2px(3f), paint)
+        canvas?.drawRoundRect(
+            paddingLeft.toFloat(),
+            paddingTop.toFloat(),
+            paddingRight.toFloat() + size * 2,
+            paddingBottom.toFloat() + size,
+            Util.dp2px(3f),
+            Util.dp2px(3f),
+            paint
+        )
     }
 }
