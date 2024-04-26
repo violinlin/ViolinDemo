@@ -8,20 +8,46 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Trace;
 import android.util.Log;
+import android.view.Choreographer;
+import android.view.GestureDetector;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
     String TAG = MainActivity.class.getSimpleName();
+    private Choreographer.FrameCallback mFrameCallback;
+    private long mPrevFrameTimeNanos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Trace.beginSection("main activity oncreate");
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity);
         initView();
+
+
+        mFrameCallback = new Choreographer.FrameCallback() {
+            @Override
+            public void doFrame(long frameTimeNanos) {
+                long frameIntervalNanos = frameTimeNanos - mPrevFrameTimeNanos;
+                double fps = 1e9 / frameIntervalNanos; // Calculate frames per second
+                mPrevFrameTimeNanos = frameTimeNanos;
+
+                // Do something with the calculated FPS, like logging or displaying on UI
+                // For example:
+                Log.d(TAG, "FPS: " + fps);
+
+                // Re-register the callback for the next frame
+                Choreographer.getInstance().postFrameCallback(this);
+            }
+        };
+        Trace.endSection();
     }
+
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -63,12 +89,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume");
+        mPrevFrameTimeNanos = System.nanoTime();
+        Choreographer.getInstance().postFrameCallback(mFrameCallback);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "onPause");
+        Choreographer.getInstance().removeFrameCallback(mFrameCallback);
     }
 
     @Override
