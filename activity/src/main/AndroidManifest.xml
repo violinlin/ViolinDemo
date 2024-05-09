@@ -3,9 +3,9 @@
     package="com.violin.activity">
 
     <application>
-        <activity android:name=".MainActivity"
-            android:launchMode="singleTask"
-            >
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="com.violin.action" />
 
@@ -13,11 +13,14 @@
                 <category android:name="com.violin.category" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DialogActivity"
+        <activity android:name=".DialogActivity"
 
             />
-<!--        android:theme="@style/Translucent"-->
+        <activity
+            android:name=".TaskAffinityActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.test" />
+        <!--        android:theme="@style/Translucent"-->
     </application>
 
 </manifest>

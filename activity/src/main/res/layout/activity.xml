@@ -16,6 +16,20 @@
         android:textAllCaps="false" />
 
     <Button
+        android:id="@+id/btn_dialog_task_affinity_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="TaskAffinity"
+        android:textAllCaps="false" />
+    <Button
+        android:id="@+id/btn_dialog_task_affinity_activity_process"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="ProcessTaskAffinity"
+        android:textAllCaps="false" />
+    <Button
         android:id="@+id/btn_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

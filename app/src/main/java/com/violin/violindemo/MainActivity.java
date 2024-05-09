@@ -13,6 +13,7 @@ import android.content.pm.ResolveInfo;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.MessageQueue;
 import android.provider.Settings;
 import android.os.Bundle;
 
@@ -174,6 +175,14 @@ public class MainActivity extends Activity {
         });
 
         initPermission();
+
+        getMainLooper().getQueue().addIdleHandler(new MessageQueue.IdleHandler() {
+            @Override
+            public boolean queueIdle() {
+                Log.d(TAG,"IdleHandler queueIdle");
+                return true;
+            }
+        });
     }
 
     private void initPermission() {

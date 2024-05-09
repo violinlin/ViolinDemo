@@ -15,6 +15,9 @@ import android.view.Choreographer;
 import android.view.GestureDetector;
 import android.view.View;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class MainActivity extends AppCompatActivity {
 
     String TAG = MainActivity.class.getSimpleName();
@@ -130,6 +133,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity.start(v.getContext());
+            }
+        });
+        findViewById(R.id.btn_dialog_task_affinity_activity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TaskAffinityActivity.start(v.getContext());
+            }
+        });
+        findViewById(R.id.btn_dialog_task_affinity_activity_process).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.violin.affinity");
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
+                startActivity(intent);
             }
         });
     }
