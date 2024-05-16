@@ -32,8 +32,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //协程标准库
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.32"
+    //协程核心库
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
+    //协程Android支持库，提供安卓UI调度器
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
     implementation project(':base')
 
 }
