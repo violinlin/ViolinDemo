@@ -10,8 +10,11 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Binder;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
@@ -48,14 +51,14 @@ public class MyService extends Service {
             manager.createNotificationChannel(notificationChannel);
         }
 
-        Intent intent = new Intent(this,ServiceActivity.class);
+        Intent intent = new Intent(this, ServiceActivity.class);
 
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         Notification preNTF = new NotificationCompat.Builder(getApplicationContext(),
                 notifyChannel)//notifyChannel 需要和 NotificationChannel中设置相同，通知才会弹出
-                .setContentTitle("service" )
+                .setContentTitle("service")
                 .setContentText("message")
                 .setSmallIcon(getApplicationContext().getApplicationInfo().icon)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.test1))
@@ -71,9 +74,28 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "onStartCommand");
+        Toast.makeText(getApplicationContext(), "Service#OnStartCommand", Toast.LENGTH_SHORT).show();
+
+        getHandler().removeCallbacksAndMessages(null);
+        getHandler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), "延迟Toast", Toast.LENGTH_SHORT).show();
+
+            }
+        }, 3000);
 
 
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private Handler handler;
+
+    private Handler getHandler() {
+        if (handler == null) {
+            handler = new Handler(Looper.getMainLooper());
+        }
+        return handler;
     }
 
     @Override

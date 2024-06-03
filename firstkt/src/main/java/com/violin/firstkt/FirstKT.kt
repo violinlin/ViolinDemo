@@ -13,6 +13,7 @@ import android.widget.Adapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.violin.firstkt.adapter.RVAdapter
 import com.violin.firstkt.bean.Book
 
@@ -21,11 +22,14 @@ import com.violin.firstkt.bean.Book
  *
  * email:wanghuilin@zshiliu.com
  */
-class FirstKT : Activity() {
+class FirstKT : AppCompatActivity() {
 
 
 
-
+lateinit var name:String
+val age:Int by lazy {
+    100
+}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kt)

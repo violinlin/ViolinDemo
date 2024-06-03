@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 
 
 import java.util.Collections;

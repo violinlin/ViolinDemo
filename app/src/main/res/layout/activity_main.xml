@@ -1,114 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layoutAnimation="@anim/anim_layout"
     tools:context="com.violin.violindemo.MainActivity">
 
-    <Button
-        android:id="@+id/btn_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="activity"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RecyclerView"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_imageview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="View"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_glsurfaceview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GlsurfaceView"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_vp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ViewPager"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_service"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Service"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btn_webview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="WebView"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btn_setting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="setting"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/btn_kotlin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="kotlin"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btn_rxtest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RXTest"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btn_palette"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Palette"
-        android:textAllCaps="false" />
-    <Button
-        android:id="@+id/btn_notify"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="通知"
-        android:textAllCaps="false" />
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
-            android:id="@+id/btn_has_permission"
-            android:layout_width="0dp"
-            android:text="是否有权限"
+            android:id="@+id/btn_activity"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:text="activity"
+            android:textAllCaps="false" />
+
         <Button
-            android:id="@+id/btn_request_permission"
-            android:layout_width="0dp"
-            android:text="请求权限"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:id="@+id/btn_recyclerview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:text="RecyclerView"
+            android:textAllCaps="false" />
+
         <Button
-            android:id="@+id/btn_hint_permission"
-            android:layout_width="0dp"
-            android:text="是否解释权限"
+            android:id="@+id/btn_imageview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:text="View"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_glsurfaceview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GlsurfaceView"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_vp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ViewPager"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Service"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_webview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WebView"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="setting"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_kotlin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="kotlin"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_rxtest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RXTest"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_palette"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Palette"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_notify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="通知"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_proxy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="动态代理"
+            android:textAllCaps="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_has_permission"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="是否有权限" />
+
+            <Button
+                android:id="@+id/btn_request_permission"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="请求权限" />
+
+            <Button
+                android:id="@+id/btn_hint_permission"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="是否解释权限" />
+
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_load_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="加载图片"
+            android:textAllCaps="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image1"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="300dp"
+                android:layout_height="300dp" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

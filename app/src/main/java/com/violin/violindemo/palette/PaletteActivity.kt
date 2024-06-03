@@ -25,6 +25,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.animation.AlphaAnimation
 import android.view.animation.TranslateAnimation
+import android.widget.ImageView
 import com.google.android.material.appbar.AppBarLayout
 
 
@@ -113,6 +114,7 @@ class PaletteActivity : AppCompatActivity() {
     }
 
     private fun setUiColor(path: String) {
+        Glide.with(this).load(path).into(ImageView(this))
 
         Glide.with(this).asBitmap().load(resources.getIdentifier(path, "drawable", packageName))
                 .into(object : SimpleTarget<Bitmap>() {

@@ -10,9 +10,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.MessageQueue;
 import android.provider.Settings;
 import android.os.Bundle;
@@ -21,10 +25,13 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import android.util.Log;
+import android.util.Printer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.violin.firstkt.FirstKT;
 import com.violin.glsurfaceview.GLActivity;
 import com.violin.imageview.ViewActivity;
@@ -35,7 +42,11 @@ import com.violin.webview.WebViewActivity;
 
 
 import java.io.IOException;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -57,14 +68,17 @@ public class MainActivity extends Activity {
 
     private String TAG = MainActivity.class.getSimpleName();
     private String permission;
+    Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        test();
 
     }
+
 
     private void initView() {
 
@@ -179,8 +193,41 @@ public class MainActivity extends Activity {
         getMainLooper().getQueue().addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
             public boolean queueIdle() {
-                Log.d(TAG,"IdleHandler queueIdle");
+//                Log.d(TAG, "IdleHandler queueIdle");
                 return true;
+            }
+        });
+//        getMainLooper().setMessageLogging(new Printer() {
+//            @Override
+//            public void println(String x) {
+//                Log.d(TAG,"messageLogging:" + x);
+//
+//            }
+//        });
+
+        final String url = "https://violinlin.github.io/img/pictures/picture1.jpg";
+        final ImageView imageView2 = findViewById(R.id.image2);
+        Glide.with(this).asBitmap().load(url).into((ImageView) findViewById(R.id.image1));
+        imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        Glide.get(v.getContext()).clearDiskCache();
+                    }
+                }.start();
+                Glide.get(v.getContext()).clearMemory();
+                Glide.with(MainActivity.this).asBitmap().load((Bitmap) null).into(imageView2);
+                Toast.makeText(v.getContext(), "清除缓存", Toast.LENGTH_SHORT).show();
+            }
+        });
+        findViewById(R.id.btn_load_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Glide.with(MainActivity.this).asBitmap().load(url).into(imageView2);
+
             }
         });
     }
@@ -223,6 +270,55 @@ public class MainActivity extends Activity {
                 }
             }
         });
+
+        findViewById(R.id.btn_proxy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Class[] cls = new Class[]{View.OnClickListener.class};
+                Proxy.newProxyInstance(getClassLoader(), cls, new InvocationHandler() {
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        return method.invoke(proxy, args);
+                    }
+                });
+                if (handler !=null) {
+                    Message msg = Message.obtain();
+                    msg.what = 1;
+                    handler.sendMessage(msg);
+
+                    Message msg1 = Message.obtain();
+                    msg1.what = 2;
+                    handler.sendMessageDelayed(msg1,3000);
+                } else {
+                    test();
+                }
+            }
+        });
+    }
+
+    private void test() {
+        new Thread() {
+            @Override
+            public void run() {
+                Looper.prepare();
+
+                handler = new Handler(Looper.myLooper()){
+                    @Override
+                    public void handleMessage(Message msg) {
+                        Log.d(TAG,"handleMessage......" + msg.what);
+                    }
+                };
+                Looper.myLooper().getQueue().addIdleHandler(new MessageQueue.IdleHandler() {
+                    @Override
+                    public boolean queueIdle() {
+                        Log.d(TAG,"queueIdle......");
+                        return true;
+                    }
+                });
+                Looper.loop();
+            }
+        }.start();
+
     }
 
     @Override
@@ -329,4 +425,5 @@ public class MainActivity extends Activity {
         });
 //        okHttpClient.newCall(new Request.Builder().build()).execute()
     }
+
 }

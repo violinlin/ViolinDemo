@@ -94,7 +94,7 @@ class FlowLayout : ViewGroup {
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
         Log.d("FlowLayout", "onTouchEvent ${ev?.action}")
         if (ev?.action == MotionEvent.ACTION_DOWN) {
-            return false
+            return true
         }
         return super.onTouchEvent(ev)
 
